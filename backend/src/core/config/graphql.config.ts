@@ -2,7 +2,7 @@ import { ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigService } from '@nestjs/config';
 import type { Request, Response } from 'express';
 import { join } from 'path';
-import { isDev } from '../shared/utils/is-dev.util';
+import { isDev } from '../../shared/utils/is-dev.util';
 
 export const getGraphQLConfig = (
   configService: ConfigService,
