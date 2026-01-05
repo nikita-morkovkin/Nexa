@@ -24,6 +24,8 @@ export const createSessionMiddleware = (
   const redisStore = new RedisStore({
     client: redis,
     prefix: sessionPrefix,
+    ttl: Math.floor(sessionMaxAge / 1000),
+    disableTouch: true,
   });
 
   return session({
@@ -31,6 +33,7 @@ export const createSessionMiddleware = (
     name: sessionName,
     resave: false,
     saveUninitialized: false,
+    rolling: false,
     cookie: {
       domain: sessionDomain,
       maxAge: sessionMaxAge,

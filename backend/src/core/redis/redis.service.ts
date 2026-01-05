@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import Redis from 'ioredis';
+import { interceptRedisSetCommand } from './redis-set.interceptor';
 
 @Injectable()
 export class RedisService extends Redis {
@@ -14,5 +15,15 @@ export class RedisService extends Redis {
       port,
       password,
     });
+
+    this.on('connect', () => {
+      console.log('Redis connected to:', { host, port });
+    });
+
+    this.on('error', err => {
+      console.error('Redis error:', err);
+    });
+
+    interceptRedisSetCommand(this);
   }
 }

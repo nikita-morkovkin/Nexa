@@ -1,4 +1,8 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { hash } from 'argon2';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { CreateUserInput } from './inputs/create-user.input';
@@ -7,8 +11,18 @@ import { CreateUserInput } from './inputs/create-user.input';
 export class AccountService {
   public constructor(private readonly prismaService: PrismaService) {}
 
-  public async findAll() {
-    return await this.prismaService.user.findMany();
+  public async me(id: string) {
+    const user = await this.prismaService.user.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException('Пользователь не найден');
+    }
+
+    return user;
   }
 
   public async create(input: CreateUserInput) {
