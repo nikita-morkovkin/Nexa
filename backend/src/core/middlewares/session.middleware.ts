@@ -9,21 +9,33 @@ export const createSessionMiddleware = (
   config: ConfigService,
   redis: RedisService,
 ) => {
+  const sessionSecret = config.getOrThrow<string>('SESSION_SECRET');
+  const sessionName = config.getOrThrow<string>('SESSION_NAME');
+  const sessionDomain = config.getOrThrow<string>('SESSION_DOMAIN');
+  const sessionMaxAge = ms(config.getOrThrow<StringValue>('SESSION_MAX_AGE'));
+  const sessionPrefix = config.getOrThrow<string>('SESSION_PREFIX');
+  const sessionHttpOnly = parseBoolean(
+    config.getOrThrow<string>('SESSION_HTTP_ONLY'),
+  );
+  const sessionSecure = parseBoolean(
+    config.getOrThrow<string>('SESSION_SECURE'),
+  );
+
   const redisStore = new RedisStore({
     client: redis,
-    prefix: config.getOrThrow<string>('SESSION_PREFIX'),
+    prefix: sessionPrefix,
   });
 
   return session({
-    secret: config.getOrThrow<string>('SESSION_SECRET'),
-    name: config.getOrThrow<string>('SESSION_NAME'),
+    secret: sessionSecret,
+    name: sessionName,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      domain: config.getOrThrow<string>('SESSION_DOMAIN'),
-      maxAge: ms(config.getOrThrow<StringValue>('SESSION_MAX_AGE')),
-      httpOnly: parseBoolean(config.getOrThrow<string>('SESSION_HTTP_ONLY')),
-      secure: parseBoolean(config.getOrThrow<string>('SESSION_SECURE')),
+      domain: sessionDomain,
+      maxAge: sessionMaxAge,
+      httpOnly: sessionHttpOnly,
+      secure: sessionSecure,
       sameSite: 'lax',
     },
     store: redisStore,

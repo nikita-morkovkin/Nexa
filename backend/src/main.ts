@@ -10,8 +10,11 @@ async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
   const redis = app.get(RedisService);
   const config = app.get(ConfigService);
+  const applicationPort = config.getOrThrow<number>('APPLICATION_PORT');
+  const allowedOrigins = config.getOrThrow<string>('ALLOWED_ORIGINS');
+  const cookiesSecret = config.getOrThrow<string>('COOKIES_SECRET');
 
-  app.use(cookieParser(config.getOrThrow<string>('COOKIES_SECRET')));
+  app.use(cookieParser(cookiesSecret));
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -21,12 +24,12 @@ async function bootstrap() {
   app.use(createSessionMiddleware(config, redis));
 
   app.enableCors({
-    origin: config.getOrThrow<string>('ALLOWED_ORIGINS'),
+    origin: allowedOrigins,
     credentials: true,
     exposedHeaders: ['Set-Cookie'],
   });
 
-  await app.listen(config.getOrThrow<number>('APPLICATION_PORT'));
+  await app.listen(applicationPort);
 }
 
 void bootstrap();
