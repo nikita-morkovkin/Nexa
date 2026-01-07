@@ -1,9 +1,7 @@
 import {
   ConflictException,
   Injectable,
-  InternalServerErrorException,
   NotFoundException,
-  Req,
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
@@ -13,6 +11,8 @@ import { PrismaService } from 'src/core/prisma/prisma.service';
 import { RedisService } from 'src/core/redis/redis.service';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
 import { getSessionMetadata } from 'src/shared/utils/session-metadata.util';
+import { destroySession, saveSession } from 'src/shared/utils/session.util';
+import { VerificationService } from '../verification/verification.service';
 import { LoginInput } from './inputs/login.input';
 
 export interface SessionData {
@@ -31,6 +31,7 @@ export class SessionService {
     private readonly prismaService: PrismaService,
     private readonly configService: ConfigService,
     private readonly redisService: RedisService,
+    private readonly verificationService: VerificationService,
   ) {}
 
   public async findByUser(req: Request) {
@@ -111,11 +112,7 @@ export class SessionService {
     };
   }
 
-  public async login(
-    @Req() req: Request,
-    input: LoginInput,
-    userAgent: string,
-  ) {
+  public async login(req: Request, input: LoginInput, userAgent: string) {
     const { login, password } = input;
 
     const user = await this.prismaService.user.findFirst({
@@ -134,40 +131,24 @@ export class SessionService {
       throw new UnauthorizedException('Неверный пароль');
     }
 
+    if (!user.isEmailVerified) {
+      try {
+        await this.verificationService.sendVerificationEmail(user);
+        console.log('Verification email sent to user:', user.email);
+      } catch {
+        throw new UnauthorizedException(
+          'Аккаунт не верифицирован, пожалуйста, проверьте вашу почту',
+        );
+      }
+    }
+
     const metadata = getSessionMetadata(req, userAgent);
 
-    return new Promise((resolve, reject) => {
-      req.session.userId = user.id;
-      req.session.createdAt = new Date();
-      req.session.metadata = metadata;
-
-      req.session.save(err => {
-        if (err) {
-          console.error('Session save detail:', err);
-          return reject(
-            new InternalServerErrorException('Ошибка при сохранении сессии'),
-          );
-        }
-        resolve(user);
-      });
-    });
+    return await saveSession(req, user, metadata);
   }
 
-  public async logout(@Req() req: Request) {
-    return new Promise((resolve, reject) => {
-      req.session.destroy(err => {
-        if (err) {
-          return reject(
-            new InternalServerErrorException('Ошибка при удалении сессии'),
-          );
-        }
-
-        req.res?.clearCookie(
-          this.configService.getOrThrow<string>('SESSION_NAME'),
-        );
-        resolve(true);
-      });
-    });
+  public async logout(req: Request) {
+    return await destroySession(req, this.configService);
   }
 
   public async clearSession(req: Request) {
@@ -177,7 +158,7 @@ export class SessionService {
 
   public async remove(req: Request, id: string) {
     if (req.session.id === id) {
-      throw new ConflictException('Cannot remove current session');
+      throw new ConflictException('Невозможно удалить текущую сессию');
     }
 
     await this.redisService.del(

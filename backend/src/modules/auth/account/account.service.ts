@@ -5,11 +5,15 @@ import {
 } from '@nestjs/common';
 import { hash } from 'argon2';
 import { PrismaService } from 'src/core/prisma/prisma.service';
+import { VerificationService } from '../verification/verification.service';
 import { CreateUserInput } from './inputs/create-user.input';
 
 @Injectable()
 export class AccountService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  public constructor(
+    private readonly prismaService: PrismaService,
+    private readonly verificationService: VerificationService,
+  ) {}
 
   public async getCurrentProfile(id: string) {
     const user = await this.prismaService.user.findUnique({
@@ -50,7 +54,7 @@ export class AccountService {
 
     const hashedPassword = await hash(password);
 
-    await this.prismaService.user.create({
+    const user = await this.prismaService.user.create({
       data: {
         email,
         password: hashedPassword,
@@ -58,6 +62,15 @@ export class AccountService {
         displayName: username,
       },
     });
+
+    try {
+      await this.verificationService.sendVerificationEmail(user);
+    } catch (error) {
+      console.warn(
+        'Failed to send verification email:',
+        error instanceof Error ? error.message : String(error),
+      );
+    }
 
     return true;
   }
