@@ -9,6 +9,7 @@ import {
   Tailwind,
   Text,
 } from '@react-email/components';
+import * as React from 'react';
 
 interface VerificationTemplateProps {
   domain: string;
@@ -45,7 +46,7 @@ const VerificationTemplate = ({ domain, token }: VerificationTemplateProps) => {
               Если у вас есть вопросы, пожалуйста, свяжитесь с нами по адресу
             </Text>
             <Link href='mailto:help@morkovkin.stream' className='text-blue-600'>
-              help@morkovkin.stream.com
+              help@morkovkin.stream
             </Link>
           </Section>
         </Body>

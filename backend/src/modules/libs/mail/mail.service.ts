@@ -2,6 +2,8 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { render } from '@react-email/render';
+import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
+import PasswordRecoveryTemplate from './templates/password-recovery.template';
 import VerificationTemplate from './templates/verification.template';
 
 @Injectable()
@@ -19,6 +21,19 @@ export class MailService {
     const html = await render(VerificationTemplate({ domain, token }));
 
     return this.sendEmail(email, 'Верификация аккаунта', html);
+  }
+
+  public async sendPasswordRecoveryToken(
+    email: string,
+    token: string,
+    metadata: SessionMetadata,
+  ): Promise<any> {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGINS');
+    const html = await render(
+      PasswordRecoveryTemplate({ domain, token, metadata }),
+    );
+
+    return this.sendEmail(email, 'Сброс пароля аккаунта', html);
   }
 
   private sendEmail(
