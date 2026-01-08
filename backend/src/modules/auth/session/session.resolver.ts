@@ -29,7 +29,9 @@ export class SessionResolver {
     @Args('data') data: LoginInput,
     @UserAgent() userAgent: string,
   ) {
-    return this.sessionService.login(req, data, userAgent);
+    const user = await this.sessionService.login(req, data, userAgent);
+
+    return { user };
   }
 
   @Authorization()

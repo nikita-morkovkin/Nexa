@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { render } from '@react-email/render';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
+import DeactivateTemplate from './templates/deactivate.template';
 import PasswordRecoveryTemplate from './templates/password-recovery.template';
 import VerificationTemplate from './templates/verification.template';
 
@@ -34,6 +35,17 @@ export class MailService {
     );
 
     return this.sendEmail(email, 'Сброс пароля аккаунта', html);
+  }
+
+  public async sendDeactivationEmail(
+    email: string,
+    metadata: SessionMetadata,
+    token: string,
+  ): Promise<any> {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGINS');
+    const html = await render(DeactivateTemplate({ domain, metadata, token }));
+
+    return this.sendEmail(email, 'Деактивация аккаунта', html);
   }
 
   private sendEmail(

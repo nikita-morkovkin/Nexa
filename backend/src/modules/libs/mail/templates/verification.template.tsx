@@ -24,7 +24,7 @@ const VerificationTemplate = ({ domain, token }: VerificationTemplateProps) => {
       <Head />
       <Preview>Верификация аккаунта</Preview>
       <Tailwind>
-        <Body className='mx-auto max-w-2xl p-6 gb-slate-50'>
+        <Body className='mx-auto max-w-2xl p-6 bg-slate-50'>
           <Section className='text-center mb-8'>
             <Heading className='text-3xl text-black font-bold'>
               Подтвердите ваш email
