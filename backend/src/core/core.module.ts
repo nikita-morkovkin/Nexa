@@ -11,6 +11,7 @@ import { VerificationModule } from 'src/modules/auth/verification/verification.m
 import { CronModule } from 'src/modules/cron/cron.module';
 import { MailModule } from 'src/modules/libs/mail/mail.module';
 import { getGraphQLConfig } from './config/graphql.config';
+import { StorageModule } from './libs/storage/storage.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
 
@@ -25,6 +26,7 @@ import { RedisModule } from './redis/redis.module';
     SessionModule,
     VerificationModule,
     MailModule,
+    StorageModule,
     CronModule,
     ConfigModule.forRoot({
       isGlobal: true,
@@ -37,6 +39,7 @@ import { RedisModule } from './redis/redis.module';
         ...getGraphQLConfig(configService),
       }),
     }),
+    StorageModule,
   ],
   controllers: [],
   providers: [],
