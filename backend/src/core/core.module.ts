@@ -10,7 +10,9 @@ import { SessionModule } from 'src/modules/auth/session/session.module';
 import { TotpModule } from 'src/modules/auth/totp/totp.module';
 import { VerificationModule } from 'src/modules/auth/verification/verification.module';
 import { CronModule } from 'src/modules/cron/cron.module';
+import { LivekitModule } from 'src/modules/libs/livekit/livekit.module';
 import { MailModule } from 'src/modules/libs/mail/mail.module';
+import { StreamModule } from 'src/modules/stream/stream.module';
 import { getGraphQLConfig } from './config/graphql.config';
 import { StorageModule } from './libs/storage/storage.module';
 import { PrismaModule } from './prisma/prisma.module';
@@ -22,6 +24,7 @@ import { RedisModule } from './redis/redis.module';
     PasswordRecoveryModule,
     DeactivateModule,
     TotpModule,
+    LivekitModule,
     RedisModule,
     AccountModule,
     SessionModule,
@@ -30,6 +33,7 @@ import { RedisModule } from './redis/redis.module';
     StorageModule,
     ProfileModule,
     CronModule,
+    StreamModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -41,7 +45,6 @@ import { RedisModule } from './redis/redis.module';
         ...getGraphQLConfig(configService),
       }),
     }),
-    StorageModule,
   ],
   controllers: [],
   providers: [],

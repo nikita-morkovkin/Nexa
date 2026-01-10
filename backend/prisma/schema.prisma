@@ -35,9 +35,11 @@ model User {
 
   isDeactivated Boolean   @default(false) @map("is_deactivated")
   deactivateAt  DateTime? @map("deactivate_at")
+  streamId      String    @unique
 
   tokens      Token[]
   socialLinks SocialLink[]
+  stream      Stream       @relation(fields: [streamId], references: [id])
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -75,4 +77,23 @@ model Token {
   userId String? @map("user_id")
 
   @@map("tokens")
+}
+
+model Stream {
+  id String @id @default(uuid())
+
+  title        String
+  thumbnailUrl String? @map("thumbnail_url")
+
+  ingressId String? @unique @map("ingress_id")
+  serverUrl String? @map("server_url")
+  streamKey String? @map("stream_key")
+  isLive    Boolean @default(false) @map("is_live")
+
+  user User?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("streams")
 }

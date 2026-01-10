@@ -26,6 +26,7 @@ export class AccountService {
       },
       include: {
         socialLinks: true,
+        stream: true,
       },
     });
 
@@ -67,6 +68,11 @@ export class AccountService {
         password: hashedPassword,
         username,
         displayName: username,
+        stream: {
+          create: {
+            title: `Стрим ${username}`,
+          },
+        },
       },
     });
 
