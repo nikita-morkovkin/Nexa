@@ -21,21 +21,19 @@ export function getSessionMetadata(
           ? req.headers['x-forwarded-for'].split(',')[0]
           : req.ip);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
   const location = ip ? lookup(ip) : null;
   const deviceResult = new DeviceDetector().parse(userAgent);
 
   return {
     location: {
       country:
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
         isoCountries.getName(location?.country || '', 'en') ||
         'Неизвестная страна',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+
       city: location?.city || 'Неизвестный город',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+
       latitude: location?.ll?.[0] || 0,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+
       longitude: location?.ll?.[1] || 0,
     },
     device: {

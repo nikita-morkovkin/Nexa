@@ -10,13 +10,30 @@ export class CategoryService {
       orderBy: {
         createdAt: 'desc',
       },
+      include: {
+        streams: {
+          include: {
+            user: true,
+            category: true,
+          },
+        },
+      },
     });
 
     return categories;
   }
 
   public async findRandom() {
-    const categories = await this.prismaService.category.findMany();
+    const categories = await this.prismaService.category.findMany({
+      include: {
+        streams: {
+          include: {
+            user: true,
+            category: true,
+          },
+        },
+      },
+    });
 
     return categories.sort(() => Math.random() - 0.5).slice(0, 7);
   }

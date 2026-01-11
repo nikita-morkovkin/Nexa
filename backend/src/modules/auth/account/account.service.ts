@@ -71,6 +71,19 @@ export class AccountService {
         stream: {
           create: {
             title: `Стрим ${username}`,
+            category: {
+              connectOrCreate: {
+                where: {
+                  slug: 'just-chatting',
+                },
+                create: {
+                  title: 'Just Chatting',
+                  slug: 'just-chatting',
+                  description: 'Общение, подкасты и IRL-стримы',
+                  thumbnailUrl: '/categories/just-chatting.webp',
+                },
+              },
+            },
           },
         },
       },
