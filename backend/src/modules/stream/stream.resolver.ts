@@ -6,6 +6,8 @@ import { Authorized } from 'src/shared/decorators/authorized.decorator';
 import { FileValidationPipe } from 'src/shared/pipes/file-validation.pipe';
 import { ChangeStreamInfoInput } from './inputs/change-stream-info.input';
 import { FiltersInput } from './inputs/filters.input';
+import { type GenerateStreamTokenInput } from './inputs/generate-stream-token.input';
+import { GenerateTokenModel } from './models/generate-token.model';
 import { StreamModel } from './models/stream.model';
 import { StreamService } from './stream.service';
 
@@ -48,5 +50,10 @@ export class StreamResolver {
   @Authorization()
   public async removeStreamThumbnail(@Authorized() user: User) {
     return await this.streamService.removeThumbnail(user);
+  }
+
+  @Mutation(() => GenerateTokenModel, { name: 'generateStreamToken' })
+  public async generateToken(@Args('data') data: GenerateStreamTokenInput) {
+    return this.streamService.generateToken(data);
   }
 }
