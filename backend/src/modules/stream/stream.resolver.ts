@@ -6,7 +6,7 @@ import { Authorized } from 'src/shared/decorators/authorized.decorator';
 import { FileValidationPipe } from 'src/shared/pipes/file-validation.pipe';
 import { ChangeStreamInfoInput } from './inputs/change-stream-info.input';
 import { FiltersInput } from './inputs/filters.input';
-import { type GenerateStreamTokenInput } from './inputs/generate-stream-token.input';
+import { GenerateStreamTokenInput } from './inputs/generate-stream-token.input';
 import { GenerateTokenModel } from './models/generate-token.model';
 import { StreamModel } from './models/stream.model';
 import { StreamService } from './stream.service';
@@ -53,7 +53,10 @@ export class StreamResolver {
   }
 
   @Mutation(() => GenerateTokenModel, { name: 'generateStreamToken' })
-  public async generateToken(@Args('data') data: GenerateStreamTokenInput) {
+  public async generateToken(
+    @Args('data', { type: () => GenerateStreamTokenInput })
+    data: GenerateStreamTokenInput,
+  ) {
     return this.streamService.generateToken(data);
   }
 }

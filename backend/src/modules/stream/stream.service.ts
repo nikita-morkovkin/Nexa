@@ -36,6 +36,7 @@ export class StreamService {
       },
       include: {
         user: true,
+        category: true,
       },
       orderBy: {
         createdAt: 'desc',
@@ -76,6 +77,7 @@ export class StreamService {
           },
           include: {
             user: true,
+            category: true,
           },
           skip: index,
         }),
@@ -86,7 +88,6 @@ export class StreamService {
   }
 
   public async changeStreamInfo(user: User, input: ChangeStreamInfoInput) {
-    // TODO: Add categoryId to data input, now it is not possible due to there is no category table in database
     const { title, categoryId } = input;
 
     await this.prismaService.stream.update({
@@ -95,7 +96,11 @@ export class StreamService {
       },
       data: {
         title,
-        // Insert categoryId here
+        category: {
+          connect: {
+            id: categoryId,
+          },
+        },
       },
     });
 
