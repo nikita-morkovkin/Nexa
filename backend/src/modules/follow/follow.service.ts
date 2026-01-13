@@ -5,10 +5,14 @@ import {
 } from '@nestjs/common';
 import type { User } from 'generated/prisma';
 import { PrismaService } from 'src/core/prisma/prisma.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable()
 export class FollowService {
-  public constructor(private readonly prismaService: PrismaService) {}
+  public constructor(
+    private readonly prismaService: PrismaService,
+    private readonly notificationService: NotificationService,
+  ) {}
 
   public async findAllMyFollowings(user: User) {
     const myFollowings = await this.prismaService.follow.findMany({
@@ -68,12 +72,27 @@ export class FollowService {
       throw new ConflictException('Вы уже подписаны на этот канал');
     }
 
-    await this.prismaService.follow.create({
+    const subscribe = await this.prismaService.follow.create({
       data: {
         followerId: user.id,
         followingId: channel.id,
       },
+      include: {
+        follower: true,
+        following: {
+          include: {
+            notificationSettings: true,
+          },
+        },
+      },
     });
+
+    if (subscribe.following.notificationSettings?.siteNotifications) {
+      await this.notificationService.createNewFollowing(
+        subscribe.following.id,
+        subscribe.follower,
+      );
+    }
 
     return true;
   }

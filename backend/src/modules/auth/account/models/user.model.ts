@@ -1,8 +1,10 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import type { User } from 'generated/prisma/client';
+import { FollowModel } from 'src/modules/follow/models/follow.model';
+import { NotificationSettingsModel } from 'src/modules/notification/models/notification-settings.model';
+import { NotificationModel } from 'src/modules/notification/models/notification.model';
 import { StreamModel } from '../../../stream/models/stream.model';
 import { SocialLinkModel } from '../../profile/models/social-link.model';
-import { FollowModel } from 'src/modules/follow/models/follow.model';
 
 @ObjectType()
 export class UserModel implements User {
@@ -12,7 +14,6 @@ export class UserModel implements User {
   @Field(() => String)
   public email: string;
 
-  @Field(() => String)
   public password: string;
 
   @Field(() => String)
@@ -26,6 +27,9 @@ export class UserModel implements User {
 
   @Field(() => String, { nullable: true })
   public bio: string | null;
+
+  @Field(() => String, { nullable: true })
+  public telegramId: string | null;
 
   @Field(() => Boolean)
   public isVerified: boolean;
@@ -42,7 +46,6 @@ export class UserModel implements User {
   @Field(() => Boolean)
   public isTotpEnabled: boolean;
 
-  @Field(() => String, { nullable: true })
   public totpSecret: string | null;
 
   @Field(() => [SocialLinkModel])
@@ -59,6 +62,12 @@ export class UserModel implements User {
 
   @Field(() => [FollowModel])
   public followings: FollowModel[];
+
+  @Field(() => [NotificationModel])
+  public notifications: NotificationModel[];
+
+  @Field(() => NotificationSettingsModel)
+  public notificationSettings: NotificationSettingsModel;
 
   @Field(() => Date)
   public createdAt: Date;
