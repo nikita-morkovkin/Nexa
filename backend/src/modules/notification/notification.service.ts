@@ -304,4 +304,158 @@ export class NotificationService {
 
     return notification;
   }
+
+  public async createEnable2FA(userId: string) {
+    const notification = await this.prismaService.notification.create({
+      data: {
+        message: `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Двухфакторная аутентификация включена</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      background-color: #9146ff;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      padding: 20px;
+      color: #333333;
+      line-height: 1.6;
+    }
+    .content p {
+      margin: 0 0 16px;
+    }
+    .footer {
+      padding: 20px;
+      font-size: 12px;
+      color: #999999;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>2FA включена!</h1>
+    </div>
+    <div class="content">
+      <p>Поздравляем! Двухфакторная аутентификация успешно включена на вашем аккаунте.</p>
+      <p>Ваш аккаунт теперь защищён дополнительным уровнем безопасности.</p>
+    </div>
+    <div class="footer">
+      Это письмо сформировано автоматически, пожалуйста, не отвечайте на него.
+    </div>
+  </div>
+</body>
+</html>`,
+        type: NotificationType.ENABLE_TWO_FACTOR_AUTH,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
+    return notification;
+  }
+
+  public async createVerifyChannel(userId: string) {
+    const notification = await this.prismaService.notification.create({
+      data: {
+        message: `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Аккаунт подтверждён</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header {
+      background-color: #9146ff;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+    .content {
+      padding: 20px;
+      color: #333333;
+      line-height: 1.6;
+    }
+    .content p {
+      margin: 0 0 16px;
+    }
+    .footer {
+      padding: 20px;
+      font-size: 12px;
+      color: #999999;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Аккаунт подтверждён!</h1>
+    </div>
+    <div class="content">
+      <p>Поздравляем! Ваш аккаунт успешно прошёл проверку и подтверждён.</p>
+      <p>Теперь вам доступны все возможности платформы.</p>
+    </div>
+    <div class="footer">
+      Это письмо сформировано автоматически, пожалуйста, не отвечайте на него.
+    </div>
+  </div>
+</body>
+</html>`,
+        type: NotificationType.VERIFIED_CHANNEL,
+        user: {
+          connect: {
+            id: userId,
+          },
+        },
+      },
+    });
+
+    return notification;
+  }
 }

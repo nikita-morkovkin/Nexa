@@ -5,8 +5,10 @@ import { render } from '@react-email/render';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
 import AccountDeletionTemplate from './templates/account-deletion.template';
 import DeactivateTemplate from './templates/deactivate.template';
+import EnableTwoFactorTemplate from './templates/enable-2fa.template';
 import PasswordRecoveryTemplate from './templates/password-recovery.template';
 import VerificationTemplate from './templates/verification.template';
+import VerifyChannelTemplate from './templates/verify-channel.template';
 
 @Injectable()
 export class MailService {
@@ -54,6 +56,28 @@ export class MailService {
     const html = await render(AccountDeletionTemplate({ domain }));
 
     return this.sendEmail(email, 'Аккаунт удален', html);
+  }
+
+  public async sendEnable2FA(email: string): Promise<any> {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGINS');
+    const html = await render(
+      EnableTwoFactorTemplate({
+        domain,
+      }),
+    );
+
+    return this.sendEmail(email, 'Обеспечьте свою безопасность', html);
+  }
+
+  public async sendVerifyChannel(email: string): Promise<any> {
+    const domain = this.configService.getOrThrow<string>('ALLOWED_ORIGINS');
+    const html = await render(
+      VerifyChannelTemplate({
+        domain,
+      }),
+    );
+
+    return this.sendEmail(email, 'Ваш канал верифицирован', html);
   }
 
   private sendEmail(

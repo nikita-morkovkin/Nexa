@@ -219,6 +219,18 @@ export class TelegramService {
     );
   }
 
+  public async sendEnable2FA(chatId: string) {
+    await this.bot.telegram.sendMessage(chatId, MESSAGES.enable2FA(), {
+      parse_mode: 'HTML',
+    });
+  }
+
+  public async sendVerifyChannel(chatId: string) {
+    await this.bot.telegram.sendMessage(chatId, MESSAGES.verifyAccount(), {
+      parse_mode: 'HTML',
+    });
+  }
+
   private async connectTelegram(userId: string, chatId: string) {
     return await this.prismaService.user.update({
       where: {
