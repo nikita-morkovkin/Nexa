@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { TokenType, type User } from 'generated/prisma/client';
+import {
+  type SponsorshipPlan,
+  TokenType,
+  type User,
+} from 'generated/prisma/client';
 import {
   Action,
   Command,
@@ -200,6 +204,18 @@ export class TelegramService {
       {
         parse_mode: 'HTML',
       },
+    );
+  }
+
+  public async sendNewSponsorship(
+    chatId: string,
+    plan: SponsorshipPlan,
+    sponsorUser: User,
+  ) {
+    await this.bot.telegram.sendMessage(
+      chatId,
+      MESSAGES.newSponsorship(plan, sponsorUser),
+      { parse_mode: 'HTML' },
     );
   }
 

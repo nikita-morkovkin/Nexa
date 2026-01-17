@@ -1,10 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import type { Category } from 'generated/prisma/client';
 import { StreamModel } from 'src/modules/stream/models/stream.model';
 
 @ObjectType()
 export class CategoryModel implements Category {
-  @Field(() => String)
+  @Field(() => ID)
   public id: string;
 
   @Field(() => String)

@@ -1,10 +1,10 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Follow } from 'generated/prisma/client';
 import { UserModel } from 'src/modules/auth/account/models/user.model';
 
 @ObjectType()
 export class FollowModel implements Follow {
-  @Field(() => String)
+  @Field(() => ID)
   public id: string;
 
   @Field(() => UserModel)
@@ -13,10 +13,10 @@ export class FollowModel implements Follow {
   @Field(() => UserModel)
   public followerUser: UserModel;
 
-  @Field(() => String)
+  @Field(() => ID)
   public followerId: string;
 
-  @Field(() => String)
+  @Field(() => ID)
   public followingId: string;
 
   @Field(() => Date)

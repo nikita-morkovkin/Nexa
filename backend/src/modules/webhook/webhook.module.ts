@@ -1,14 +1,23 @@
 import { type MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from 'src/core/prisma/prisma.module';
 import { RawBodyMiddleware } from 'src/shared/middlewares/raw-body.middleware';
 import { LivekitModule } from '../libs/livekit/livekit.module';
+import { StripeModule } from '../libs/stripe/stripe.module';
 import { TelegramModule } from '../libs/telegram/telegram.module';
 import { NotificationModule } from '../notification/notification.module';
 import { WebhookController } from './webhook.controller';
 import { WebhookService } from './webhook.service';
 
 @Module({
-  imports: [LivekitModule, PrismaModule, NotificationModule, TelegramModule],
+  imports: [
+    LivekitModule,
+    PrismaModule,
+    NotificationModule,
+    TelegramModule,
+    StripeModule,
+    ConfigModule,
+  ],
   controllers: [WebhookController],
   providers: [WebhookService],
 })

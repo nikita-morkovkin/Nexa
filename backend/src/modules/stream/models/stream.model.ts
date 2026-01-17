@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import type { Stream } from 'generated/prisma/client';
 import { CategoryModel } from 'src/modules/category/models/category.model';
 import { ChatMessageModel } from 'src/modules/chat/models/chat-message.model';
@@ -6,7 +6,7 @@ import { UserModel } from '../../auth/account/models/user.model';
 
 @ObjectType()
 export class StreamModel implements Stream {
-  @Field(() => String)
+  @Field(() => ID)
   public id: string;
 
   @Field(() => String)

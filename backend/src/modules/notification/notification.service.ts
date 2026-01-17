@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {
   NotificationType,
+  type SponsorshipPlan,
   TokenType,
   type User,
 } from 'generated/prisma/client';
@@ -44,6 +45,26 @@ export class NotificationService {
     });
 
     return notifications;
+  }
+
+  public async createNewSponsorship(userId: string, plan: SponsorshipPlan) {
+    await this.prismaService.notification.create({
+      data: {
+        userId,
+        type: NotificationType.NEW_SPONSOR,
+        message: `<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новый спонсор</title>
+</head>
+<body>
+  <p>Ваш спонсор подписался на план ${plan.title}</p>
+</body>
+</html>`,
+      },
+    });
   }
 
   public async changeSettings(

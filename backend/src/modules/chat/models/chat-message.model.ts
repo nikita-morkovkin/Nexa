@@ -1,11 +1,11 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { ChatMessage } from 'generated/prisma/client';
 import { UserModel } from 'src/modules/auth/account/models/user.model';
 import { StreamModel } from 'src/modules/stream/models/stream.model';
 
 @ObjectType()
 export class ChatMessageModel implements ChatMessage {
-  @Field(() => String)
+  @Field(() => ID)
   public id: string;
 
   @Field(() => String)

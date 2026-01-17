@@ -27,6 +27,15 @@ enum NotificationType {
   @@map("notification_types")
 }
 
+enum TransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+  EXPIRED
+
+  @@map("transaction_statuses")
+}
+
 model User {
   id String @id @default(uuid())
 
@@ -57,9 +66,13 @@ model User {
   stream       Stream        @relation(fields: [streamId], references: [id])
   chatMessages ChatMessage[]
 
-  followers            Follow[]              @relation(name: "Followers")
-  followings           Follow[]              @relation(name: "Followings")
-  notificationSettings NotificationSettings?
+  followers                Follow[]                  @relation(name: "Followers")
+  followings               Follow[]                  @relation(name: "Followings")
+  notificationSettings     NotificationSettings?
+  transactions             Transaction[]
+  sponsorshipPlans         SponsorshipPlan[]
+  sponsorshipSubscriptions SponsorshipSubscription[] @relation(name: "sponsorship_subscriptions")
+  sponsors                 SponsorshipSubscription[] @relation(name: "sponsors")
 
   // Time
   createdAt DateTime @default(now()) @map("created_at")
@@ -131,7 +144,7 @@ model Stream {
 }
 
 model Follow {
-  id String @id @default(uuid()) @map("id")
+  id String @id @default(uuid())
 
   follower   User   @relation(name: "Followings", fields: [followerId], references: [id], onDelete: Cascade)
   followerId String @map("follower_id")
@@ -212,4 +225,66 @@ model NotificationSettings {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("notification_settings")
+}
+
+model Transaction {
+  id String @id @default(uuid())
+
+  amount   Float
+  currency String
+  status   TransactionStatus @default(PENDING) @map("status")
+
+  // Added AI after checking functional in transaction service
+  stripeSubscriptionId String? @map("stripe_subscription_id")
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String? @map("user_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("transactions")
+}
+
+model SponsorshipSubscription {
+  id String @id @default(uuid())
+
+  plan   SponsorshipPlan @relation(fields: [planId], references: [id])
+  planId String          @map("plan_id")
+
+  subscriber   User   @relation(name: "sponsorship_subscriptions", fields: [subscriberId], references: [id])
+  subscriberId String @map("subscriber_id")
+
+  channel   User   @relation(name: "sponsors", fields: [channelId], references: [id])
+  channelId String @map("channel_id")
+
+  expiresAt DateTime @map("expires_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("sponsorship_subscriptions")
+}
+
+model SponsorshipPlan {
+  id String @id @default(uuid())
+
+  title       String
+  description String?
+  price       Float
+
+  stripeProductId String @unique @map("stripe_product_id")
+  stripePlanId    String @unique @map("stripe_plan_id")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+
+  subscriptions SponsorshipSubscription[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("sponsorship_plans")
 }

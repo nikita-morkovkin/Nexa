@@ -1,4 +1,4 @@
-import type { User } from 'generated/prisma/client';
+import type { SponsorshipPlan, User } from 'generated/prisma/client';
 import type { SessionMetadata } from 'src/shared/types/session-metadata.types';
 
 export const MESSAGES = {
@@ -45,4 +45,8 @@ export const MESSAGES = {
     `<b>🌟 Новый подписчик!</b>\n\n` +
     `На вас подписался пользователь: <a href="https://morkovkinstream.xyz/${follower.username}">${follower.username}</a>.\n\n` +
     `Теперь у вас ${followersCount} подписчиков!`,
+  newSponsorship: (plan: SponsorshipPlan, sponsorUser: User) =>
+    `<b>💰 Новый спонсор!</b>\n\n` +
+    `Пользователь <a href="https://morkovkinstream.xyz/${sponsorUser.username}">${sponsorUser.username}</a> стал спонсором на план ${plan.title}.\n\n` +
+    `Спасибо за ваш вклад!`,
 };
