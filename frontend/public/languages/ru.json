@@ -1,5 +1,18 @@
 {
-  "home": {
-    "title": "Главная страница"
+  "auth": {
+    "register": {
+      "heading": "Регистрация в MorkovkinStream",
+      "backButtonLabel": "Есть учетная запись? Войти",
+      "usernameLabel": "Имя пользователя",
+      "emailLabel": "Почта",
+      "passwordLabel": "Пароль",
+      "submitButton": "Зарегистрироваться",
+      "successAlertTitle": "Проверьте свою почту",
+      "successAlertDescription": "На ваш адрес электронной почты было отправлено письмо для подтверждения. Если вы не видите письмо, проверьте папку «Спам»",
+      "errorMessage": "Ошибка при создании аккаунта"
+    },
+    "verify": {
+      "successMessage": "Аккаунт верифицирован"
+    }
   }
 }

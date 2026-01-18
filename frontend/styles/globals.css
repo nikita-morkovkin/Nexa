@@ -38,6 +38,11 @@
 }
 
 @layer base {
+  html,
+  body {
+    height: 100%;
+  }
+
   :root {
     --background: hsl(240 7% 97%);
     --foreground: hsl(240 7% 6%);
@@ -101,5 +106,9 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+  }
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
   }
 }
