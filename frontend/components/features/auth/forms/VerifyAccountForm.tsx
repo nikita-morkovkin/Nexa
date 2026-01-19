@@ -1,6 +1,7 @@
 'use client';
 
 import { VerifyAccountDocument } from '@/graphql/gql/graphql';
+import { useAuth } from '@/hooks/useAuth';
 import { useMutation } from '@apollo/client/react';
 import { Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -11,6 +12,7 @@ import AuthWrapper from '../AuthWrapper';
 
 const VerifyAccountForm = () => {
   const t = useTranslations('auth.verify');
+  const { auth } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -18,6 +20,7 @@ const VerifyAccountForm = () => {
 
   const [verifyAccount] = useMutation(VerifyAccountDocument, {
     onCompleted() {
+      auth();
       toast.success(t('successMessage'));
       router.push('dashboard/settings');
     },
