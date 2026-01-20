@@ -1,0 +1,8 @@
+query FindCurrentProfile {
+  findCurrentProfile {
+    username
+    email
+    isTotpEnabled
+    avatar
+  }
+}

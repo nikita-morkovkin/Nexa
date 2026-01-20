@@ -16,18 +16,26 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
 type Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": typeof types.CreateUserDocument,
     "mutation LoginUser($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      username\n    }\n    message\n  }\n}": typeof types.LoginUserDocument,
+    "mutation LogoutUser {\n  logout\n}": typeof types.LogoutUserDocument,
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": typeof types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
-    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    username\n    avatar\n    email\n  }\n}": typeof types.FindChannelByUsernameDocument,
+    "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
+    "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
+    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}": typeof types.FindCurrentProfileDocument,
+    "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": typeof types.FindUnreadNotificationsCountDocument,
 };
 const documents: Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": types.CreateUserDocument,
     "mutation LoginUser($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      username\n    }\n    message\n  }\n}": types.LoginUserDocument,
+    "mutation LogoutUser {\n  logout\n}": types.LogoutUserDocument,
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
-    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    username\n    avatar\n    email\n  }\n}": types.FindChannelByUsernameDocument,
+    "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
+    "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
+    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}": types.FindCurrentProfileDocument,
+    "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": types.FindUnreadNotificationsCountDocument,
 };
 
 /**
@@ -55,6 +63,10 @@ export function graphql(source: "mutation LoginUser($data: LoginInput!) {\n  log
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation LogoutUser {\n  logout\n}"): (typeof documents)["mutation LogoutUser {\n  logout\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}"): (typeof documents)["mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -67,7 +79,19 @@ export function graphql(source: "mutation VerifyAccount($data: VerificationInput
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    username\n    avatar\n    email\n  }\n}"): (typeof documents)["query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    username\n    avatar\n    email\n  }\n}"];
+export function graphql(source: "mutation ClearSessionCookie {\n  clearSessionCookie\n}"): (typeof documents)["mutation ClearSessionCookie {\n  clearSessionCookie\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"): (typeof documents)["query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}"): (typeof documents)["query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"): (typeof documents)["query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

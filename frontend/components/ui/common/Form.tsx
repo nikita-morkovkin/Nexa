@@ -14,7 +14,7 @@ import {
 } from 'react-hook-form';
 
 import { Label } from '@/components/ui/common/Label';
-import { cn } from '@/utils/tw-merge';
+import { cn } from '@/utils/tw-merge.util';
 
 const Form = FormProvider;
 

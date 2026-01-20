@@ -1,4 +1,4 @@
-import { cn } from '@/utils/tw-merge';
+import { cn } from '@/utils/tw-merge.util';
 import { ComponentProps } from 'react';
 
 function Input({ className, type, ...props }: ComponentProps<'input'>) {

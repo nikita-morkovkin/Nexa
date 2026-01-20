@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge';
+import { cn } from '@/utils/tw-merge.util';
 import { OTPInput, OTPInputContext } from 'input-otp';
 import { MinusIcon } from 'lucide-react';
 import { ComponentProps, useContext } from 'react';
