@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/common/Button';
 import { Form, FormField } from '@/components/ui/common/Form';
 import ChannelAvatar from '@/components/ui/elements/ChannelAvatar';
+import ConfirmModal from '@/components/ui/elements/ConfirmModal';
 import FormWrapper from '@/components/ui/elements/FormWrapper';
 import {
   ChangeProfileAvatarDocument,
@@ -111,15 +112,20 @@ const ChangeAvatarForm = () => {
                       <p className='font-semibold'>{t('updateButton')}</p>
                     </Button>
                     {user?.avatar && (
-                      <Button
-                        onClick={() => removeAvatar()}
-                        className={cn(isMobile ? 'mt-[12px] ml-1' : '')}
-                        variant={'ghost'}
-                        size={'lgIcon'}
-                        disabled={isLoadingUpdate || isLoadingRemove}
+                      <ConfirmModal
+                        heading={t('confirmModal.heading')}
+                        message={t('confirmModal.message')}
+                        onConfirm={() => removeAvatar()}
                       >
-                        <Trash className='size-4.5' />
-                      </Button>
+                        <Button
+                          className={cn(isMobile ? 'mt-[12px] ml-1' : '')}
+                          variant={'ghost'}
+                          size={'lgIcon'}
+                          disabled={isLoadingUpdate || isLoadingRemove}
+                        >
+                          <Trash className='size-4.5' />
+                        </Button>
+                      </ConfirmModal>
                     )}
                   </div>
                   <p className='text-sm ml-1 text-muted-foreground'>
