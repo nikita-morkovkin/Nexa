@@ -7,8 +7,8 @@ import {
 } from '@/components/ui/common/DropdownMenu';
 import ChannelAvatar from '@/components/ui/elements/ChannelAvatar';
 import { LogoutUserDocument } from '@/graphql/gql/graphql';
-import { useAuth } from '@/hooks/useAuth';
-import { useCurrentProfile } from '@/hooks/useCurrentProfile';
+import { useAuth } from '@/shared/hooks/useAuth';
+import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
 import { useMutation } from '@apollo/client/react';
 import { LayoutDashboard, Loader, LogOut, User } from 'lucide-react';
 import { useTranslations } from 'next-intl';

@@ -1,11 +1,11 @@
 'use client';
 
-import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useSidebar } from '@/hooks/useSidebar';
-import { cn } from '@/utils/tw-merge.util';
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
+import { useSidebar } from '@/shared/hooks/useSidebar';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { useEffect, type PropsWithChildren } from 'react';
 
-const LayoutContainer = ({ children }: PropsWithChildren<unknown>) => {
+const AppLayout = ({ children }: PropsWithChildren<unknown>) => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const { isOpen, close, open } = useSidebar();
 
@@ -26,4 +26,4 @@ const LayoutContainer = ({ children }: PropsWithChildren<unknown>) => {
   );
 };
 
-export default LayoutContainer;
+export default AppLayout;

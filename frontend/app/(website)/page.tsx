@@ -1,7 +1,7 @@
 'use client';
 
 import ChannelAvatar from '@/components/ui/elements/ChannelAvatar';
-import { useCurrentProfile } from '../../hooks/useCurrentProfile';
+import { useCurrentProfile } from '../../shared/hooks/useCurrentProfile';
 
 export default function Home() {
   const { user, isLoadingProfile } = useCurrentProfile();

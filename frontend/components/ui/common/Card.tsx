@@ -1,4 +1,4 @@
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { ComponentProps } from 'react';
 
 function Card({ className, ...props }: ComponentProps<'div'>) {

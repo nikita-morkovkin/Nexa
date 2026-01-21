@@ -16,8 +16,8 @@ import {
   InputOTPSlot,
 } from '@/components/ui/common/InputOTP';
 import { LoginUserDocument } from '@/graphql/gql/graphql';
-import { useAuth } from '@/hooks/useAuth';
 import { loginSchema, type TypeLoginSchema } from '@/schemas/auth/login.schema';
+import { useAuth } from '@/shared/hooks/useAuth';
 import { useMutation } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
@@ -55,7 +55,7 @@ const LoginForm = () => {
         if (data.login.message) {
           setIsShow2FA(true);
         } else {
-          auth()
+          auth();
           toast.success('successMessage');
           router.push('/dashboard/settings');
         }

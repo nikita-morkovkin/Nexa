@@ -1,4 +1,4 @@
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ComponentProps } from 'react';
 

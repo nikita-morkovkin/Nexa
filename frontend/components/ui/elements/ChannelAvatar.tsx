@@ -1,6 +1,6 @@
 import { FindCurrentProfileQuery } from '@/graphql/gql/graphql';
-import { getMediaSource } from '@/utils/get-media-source.util';
-import { cn } from '@/utils/tw-merge.util';
+import { getMediaSource } from '@/shared/utils/get-media-source.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Avatar, AvatarFallback, AvatarImage } from '../common/Avatar';
 
@@ -10,6 +10,7 @@ const avatarSizes = cva('', {
       sm: 'size-7',
       default: 'size-9',
       large: 'size-14',
+      xl: 'size-32',
     },
   },
   defaultVariants: {
@@ -39,8 +40,20 @@ const ChannelAvatar = ({
           src={getMediaSource(channel.avatar)}
           className='object-cover'
         />
-        <AvatarFallback className='flex items-center justify-center'>
-          <p className='font-semibold mb-[5px]'>{channel.username?.[0]}</p>
+        <AvatarFallback
+          className={cn(
+            'flex items-center justify-center',
+            size === 'xl' && 'text-5xl',
+          )}
+        >
+          <p
+            className={cn(
+              'font-semibold mb-[5px]',
+              size === 'xl' && 'mb-[14px]',
+            )}
+          >
+            {channel.username?.[0]}
+          </p>
         </AvatarFallback>
       </Avatar>
     </div>

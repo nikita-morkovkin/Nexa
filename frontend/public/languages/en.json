@@ -51,7 +51,7 @@
 
   "auth": {
     "register": {
-      "heading": "Sign up for MorkovkinStream",
+      "heading": "Sign up for Nexa",
       "backButtonLabel": "Already have an account? Log in",
       "usernameLabel": "Username",
       "emailLabel": "Email",
@@ -67,7 +67,7 @@
       "errorMessage": "Account verified error"
     },
     "login": {
-      "heading": "Sign in to TeaStream",
+      "heading": "Sign in to Nexa",
       "backButtonLabel": "Don't have an account? Register!",
       "pinLabel": "6-digit code",
       "loginLabel": "Login",
@@ -97,6 +97,39 @@
       "submitButton": "Set new Password",
       "successMessage": "Password changed successfully",
       "errorMessage": "Error while setting the new password"
+    }
+  },
+
+  "dashboard": {
+    "settings": {
+      "header": {
+        "heading": "Settings",
+        "description": "Here you can manage your settings",
+        "profile": "Profile",
+        "account": "Account",
+        "appearance": "Appearance",
+        "notifications": "Notifications",
+        "sessions": "Sessions"
+      },
+      "profile": {
+        "header": {
+          "heading": "Profile",
+          "description": "Set up your profile, update your avatar, change your bio, and add links to social networks to make your page more attractive to other users."
+        },
+        "avatar": {
+          "heading": "Profile Image",
+          "updateButton": "Update profile image",
+          "confirmModal": {
+            "heading": "Remove avatar",
+            "message": "Are you sure you want to remove your profile image? This action cannot be undone"
+          },
+          "info": "Supported formats: JPG, JPEG, PNG, WEBP or GIF. Max size: 10 MB",
+          "successUpdateMessage": "Image uploaded successfully",
+          "errorMessage": "Error updating profile image",
+          "successRemoveMessage": "Profile image updated successfully",
+          "errorRemoveMessage": "Error removing profile image"
+        }
+      }
     }
   },
 

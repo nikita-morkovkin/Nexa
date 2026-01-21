@@ -1,4 +1,4 @@
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ComponentProps } from 'react';
@@ -17,6 +17,7 @@ const buttonVariants = cva(
       size: {
         default: 'h-10 px-5 py-2 rounded-full',
         icon: 'size-10 rounded-full',
+        lgIcon: 'size-11 rounded-full',
       },
     },
     defaultVariants: {

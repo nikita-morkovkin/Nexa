@@ -1,7 +1,7 @@
 'use client';
 
 import { VerifyAccountDocument } from '@/graphql/gql/graphql';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/shared/hooks/useAuth';
 import { useMutation } from '@apollo/client/react';
 import { Loader } from 'lucide-react';
 import { useTranslations } from 'next-intl';

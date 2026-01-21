@@ -24,9 +24,9 @@ export class ProfileService {
       await this.storageService.remove(user.avatar);
     }
 
-    const chunks: Buffer[] = [];
+    const chunks: Uint8Array[] = [];
 
-    for await (const chunk of file.createReadStream() as AsyncIterable<Buffer>) {
+    for await (const chunk of file.createReadStream() as AsyncIterable<Uint8Array>) {
       chunks.push(chunk);
     }
 

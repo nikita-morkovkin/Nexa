@@ -1,7 +1,7 @@
 'use client';
 
-import { useSidebar } from '@/hooks/useSidebar';
-import { cn } from '@/utils/tw-merge.util';
+import { useSidebar } from '@/shared/hooks/useSidebar';
+import { cn } from '@/shared/utils/tw-merge.util';
 import { usePathname } from 'next/navigation';
 import DashboardNav from './DashboardNav';
 import SidebarHeader from './SidebarHeader';

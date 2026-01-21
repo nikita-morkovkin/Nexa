@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu';
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 import { ComponentProps } from 'react';

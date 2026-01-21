@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/common/Button';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/shared/hooks/useAuth';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import ProfileMenu from './ProfileMenu';
@@ -16,10 +16,10 @@ const HeaderMenu = () => {
         <ProfileMenu />
       ) : (
         <>
-          <Link href={'account/login'}>
+          <Link href={'/account/login'}>
             <Button variant={'secondary'}>{t('login')}</Button>
           </Link>
-          <Link href={'account/create'}>
+          <Link href={'/account/create'}>
             <Button>{t('register')}</Button>
           </Link>
         </>

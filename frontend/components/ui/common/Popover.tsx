@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import * as PopoverPrimitive from '@radix-ui/react-popover';
 import { type ComponentProps } from 'react';
 

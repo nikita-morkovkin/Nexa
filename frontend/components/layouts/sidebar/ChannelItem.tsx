@@ -6,8 +6,8 @@ import ChannelVerified from '@/components/ui/elements/ChannelVerified';
 import Hint from '@/components/ui/elements/Hint';
 import LiveBadge from '@/components/ui/elements/LiveBadge';
 import { FindRecommendedChannelsQuery } from '@/graphql/gql/graphql';
-import { useSidebar } from '@/hooks/useSidebar';
-import { cn } from '@/utils/tw-merge.util';
+import { useSidebar } from '@/shared/hooks/useSidebar';
+import { cn } from '@/shared/utils/tw-merge.util';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

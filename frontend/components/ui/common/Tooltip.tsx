@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { type ComponentProps } from 'react';
 

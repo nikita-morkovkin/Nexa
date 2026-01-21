@@ -2,8 +2,8 @@
 
 import { Button } from '@/components/ui/common/Button';
 import Hint from '@/components/ui/elements/Hint';
-import { useSidebar } from '@/hooks/useSidebar';
-import { cn } from '@/utils/tw-merge.util';
+import { useSidebar } from '@/shared/hooks/useSidebar';
+import { cn } from '@/shared/utils/tw-merge.util';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { RouteItem } from './types/route.interface';

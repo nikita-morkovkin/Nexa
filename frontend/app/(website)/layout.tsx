@@ -1,5 +1,5 @@
+import AppLayout from '@/components/layouts/AppLayout';
 import Header from '@/components/layouts/header/Header';
-import LayoutContainer from '@/components/layouts/LayoutContainer';
 import Sidebar from '@/components/layouts/sidebar/Sidebar';
 import { type ReactNode } from 'react';
 
@@ -15,7 +15,7 @@ export default async function WebsiteLayout({
           <Header />
         </div>
         <Sidebar />
-        <LayoutContainer>{children}</LayoutContainer>
+        <AppLayout>{children}</AppLayout>
       </div>
     </div>
   );

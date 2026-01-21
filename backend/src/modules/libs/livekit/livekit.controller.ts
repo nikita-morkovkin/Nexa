@@ -3,5 +3,5 @@ import { LivekitService } from './livekit.service';
 
 @Controller('livekit')
 export class LivekitController {
-  constructor(private readonly livekitService: LivekitService) {}
+  public constructor(private readonly livekitService: LivekitService) {}
 }

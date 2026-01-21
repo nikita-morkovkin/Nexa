@@ -1,14 +1,5 @@
 import { useCallback, useSyncExternalStore } from 'react';
 
-/**
- * Custom hook to subscribe to media queries.
- * Optimized for React 18+ and Next.js SSR using useSyncExternalStore.
- *
- * @param query The media query to match (e.g., '(max-width: 768px)')
- * @param defaultValue Default value for SSR and initial render (default: false)
- * @returns boolean indicating if the media query matches
- */
-
 export function useMediaQuery(
   query: string,
   defaultValue: boolean = false,

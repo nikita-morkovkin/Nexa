@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { ComponentProps } from 'react';
 

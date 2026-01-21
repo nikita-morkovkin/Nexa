@@ -50,7 +50,7 @@ export class TransactionService {
         where: {
           subscriberId: user.id,
           // WARNING: It is not safe to use non-null operator
-          channelId: plan.userId!,
+          channelId: plan.userId,
         },
       });
 

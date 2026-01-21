@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@/utils/tw-merge.util';
+import { cn } from '@/shared/utils/tw-merge.util';
 import * as LabelPrimitive from '@radix-ui/react-label';
 import { ComponentProps } from 'react';
 

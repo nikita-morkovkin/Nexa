@@ -3,7 +3,7 @@ import {
   FindNotificationsByUserDocument,
   FindUnreadNotificationsCountDocument,
 } from '@/graphql/gql/graphql';
-import { getNotificationIcon } from '@/utils/get-notification-icon.util';
+import { getNotificationIcon } from '@/shared/utils/get-notification-icon.util';
 import { useQuery } from '@apollo/client/react';
 import parse from 'html-react-parser';
 import { Loader2 } from 'lucide-react';

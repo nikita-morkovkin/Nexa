@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/common/Button';
 import Hint from '@/components/ui/elements/Hint';
-import { useSidebar } from '@/hooks/useSidebar';
+import { useSidebar } from '@/shared/hooks/useSidebar';
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
