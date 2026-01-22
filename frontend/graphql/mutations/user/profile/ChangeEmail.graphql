@@ -1,0 +1,3 @@
+mutation ChangeEmailUser($data: ChangeEmailInput!) {
+  changeEmail(data: $data)
+}

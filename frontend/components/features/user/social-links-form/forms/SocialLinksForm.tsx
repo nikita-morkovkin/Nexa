@@ -25,7 +25,7 @@ import { Separator } from '@radix-ui/react-dropdown-menu';
 import { useTranslations } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import SocialLinkFormSkeleton from './skeletons/SocialLinkFormSkeleton';
+import SocialLinkFormSkeleton from '../skeletons/SocialLinkFormSkeleton';
 import SocialLinkList from './SocialLinkList';
 
 const SocialLinksForm = () => {
@@ -113,7 +113,7 @@ const SocialLinksForm = () => {
           />
           <Separator />
 
-          <div className='flex justify-end p-5'>
+          <div className='flex justify-end pt-5 pr-0.5 pb-3'>
             <Button
               disabled={
                 !isValid ||

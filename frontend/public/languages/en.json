@@ -165,6 +165,60 @@
           "successReorderMessage": "Social media links order changed",
           "errorReorderMessage": "Error changing social media links order"
         }
+      },
+      "account": {
+        "header": {
+          "heading": "Account",
+          "description": "Manage your account settings, including access changes, security, and deactivation options.",
+          "securityHeading": "Security",
+          "deactivationHeading": "Deactivation"
+        },
+        "email": {
+          "heading": "Email Address",
+          "emailLabel": "Email",
+          "submitButton": "Save",
+          "successMessage": "Email updated successfully",
+          "errorMessage": "Error during updating email"
+        },
+        "password": {
+          "heading": "Account Password",
+          "oldPasswordLabel": "Old Password",
+          "newPasswordLabel": "New Password",
+          "submitButton": "Save",
+          "successMessage": "Password updated successfully",
+          "errorMessage": "Error when updating password"
+        },
+        "twoFactor": {
+          "heading": "TOTP Authentication",
+          "description": "Increase your account security by activating TOTP authentication. This additional layer of protection requires a unique code, making your account less vulnerable to unauthorized access.",
+          "enable": {
+            "trigger": "Enable",
+            "heading": "Enabling TOTP",
+            "qrInstructions": "Scan the QR code to add TOTP",
+            "secretCodeLabel": "Secret Code: ",
+            "pinLabel": "PIN Code",
+            "pinDescription": "Please enter the 6-digit code provided by your authentication app.",
+            "submitButton": "Confirm",
+            "successMessage": "TOTP authentication enabled",
+            "errorMessage": "Error verifying code"
+          },
+          "disable": {
+            "trigger": "Disable",
+            "heading": "Are you sure you want to disable TOTP?",
+            "message": "Disabling TOTP authentication will make your account less secure. Are you sure you want to continue?",
+            "successMessage": "TOTP authentication disabled",
+            "errorMessage": "Error while disabling"
+          }
+        },
+        "deactivation": {
+          "heading": "Account Deactivation",
+          "description": "After deactivating your account, you will not be able to log in. The account will be permanently deleted after 7 days. Until then, you can contact support to regain access and unlock your account.",
+          "confirmModal": {
+            "heading": "Confirm Deactivation",
+            "message": "Are you sure you want to deactivate your account? Access can only be restored within 7 days."
+          },
+          "deactivateButton": "Deactivate"
+        }
       }
     }
   },

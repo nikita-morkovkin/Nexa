@@ -6,9 +6,11 @@ import {
 } from '@/components/ui/common/Tabs';
 import Heading from '@/components/ui/elements/Heading';
 import { useTranslations } from 'next-intl';
+import ChangeEmailForm from './account/forms/ChangeEmailForm';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
-import SocialLinksForm from './social-links-form/SocialLinksForm';
+import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
+import ChangePasswordForm from './account/forms/ChangePasswordForm';
 
 const UserSettings = () => {
   const t = useTranslations('dashboard.settings');
@@ -49,7 +51,16 @@ const UserSettings = () => {
             <SocialLinksForm />
           </div>
         </TabsContent>
-        <TabsContent value='account'></TabsContent>
+        <TabsContent value='account' className='mt-6'>
+          <div className='space-y-6'>
+            <Heading
+              title={t('account.header.heading')}
+              description={t('account.header.description')}
+            />
+            <ChangeEmailForm />
+            <ChangePasswordForm />
+          </div>
+        </TabsContent>
         <TabsContent value='appearance'></TabsContent>
         <TabsContent value='notifications'></TabsContent>
         <TabsContent value='sessions'></TabsContent>

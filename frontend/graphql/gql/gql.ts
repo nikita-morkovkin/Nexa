@@ -21,6 +21,8 @@ type Documents = {
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
+    "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}": typeof types.ChangeEmailUserDocument,
+    "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": typeof types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": typeof types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": typeof types.ChangeProfileInfoDocument,
     "mutation RemoveProfileAvatar {\n  removeAvatar\n}": typeof types.RemoveProfileAvatarDocument,
@@ -42,6 +44,8 @@ const documents: Documents = {
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
+    "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}": types.ChangeEmailUserDocument,
+    "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": types.ChangeProfileInfoDocument,
     "mutation RemoveProfileAvatar {\n  removeAvatar\n}": types.RemoveProfileAvatarDocument,
@@ -98,6 +102,14 @@ export function graphql(source: "mutation VerifyAccount($data: VerificationInput
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ClearSessionCookie {\n  clearSessionCookie\n}"): (typeof documents)["mutation ClearSessionCookie {\n  clearSessionCookie\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}"): (typeof documents)["mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}"): (typeof documents)["mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -125,7 +125,7 @@ const ChangeInfoForm = () => {
             )}
           />
 
-          <div className='flex justify-end p-5'>
+          <div className='flex justify-end pt-5 pr-0.5 pb-3'>
             <Button
               disabled={
                 !isValid || !isDirty || isLoadingProfile || isUserInfoLoading
