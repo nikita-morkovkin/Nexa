@@ -25,16 +25,19 @@ type Documents = {
     "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": typeof types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": typeof types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": typeof types.ChangeProfileInfoDocument,
+    "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": typeof types.EnableTotpDocument,
     "mutation RemoveProfileAvatar {\n  removeAvatar\n}": typeof types.RemoveProfileAvatarDocument,
     "mutation CreateSocialLink($data: SocialLinkInput!) {\n  createSocialLink(data: $data)\n}": typeof types.CreateSocialLinkDocument,
     "mutation removeSocialLink($id: String!) {\n  removeSocialLink(id: $id)\n}": typeof types.RemoveSocialLinkDocument,
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": typeof types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": typeof types.UpdateSocialLinkDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
+    "mutation DisableTotp {\n  disableTotp\n}": typeof types.DisableTotpDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
-    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n  }\n}": typeof types.FindCurrentProfileDocument,
+    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": typeof types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": typeof types.FindSocialLinksDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": typeof types.FindUnreadNotificationsCountDocument,
+    "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": typeof types.GenerateTotpSecretDocument,
 };
 const documents: Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": types.CreateUserDocument,
@@ -48,16 +51,19 @@ const documents: Documents = {
     "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": types.ChangeProfileInfoDocument,
+    "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": types.EnableTotpDocument,
     "mutation RemoveProfileAvatar {\n  removeAvatar\n}": types.RemoveProfileAvatarDocument,
     "mutation CreateSocialLink($data: SocialLinkInput!) {\n  createSocialLink(data: $data)\n}": types.CreateSocialLinkDocument,
     "mutation removeSocialLink($id: String!) {\n  removeSocialLink(id: $id)\n}": types.RemoveSocialLinkDocument,
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": types.UpdateSocialLinkDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
+    "mutation DisableTotp {\n  disableTotp\n}": types.DisableTotpDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
-    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n  }\n}": types.FindCurrentProfileDocument,
+    "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": types.FindSocialLinksDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": types.FindUnreadNotificationsCountDocument,
+    "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": types.GenerateTotpSecretDocument,
 };
 
 /**
@@ -121,6 +127,10 @@ export function graphql(source: "mutation ChangeProfileInfo($data: ChangeProfile
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}"): (typeof documents)["mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "mutation RemoveProfileAvatar {\n  removeAvatar\n}"): (typeof documents)["mutation RemoveProfileAvatar {\n  removeAvatar\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -145,11 +155,15 @@ export function graphql(source: "query FindRecommendedChannels {\n  findRecommen
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation DisableTotp {\n  disableTotp\n}"): (typeof documents)["mutation DisableTotp {\n  disableTotp\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"): (typeof documents)["query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n  }\n}"): (typeof documents)["query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n  }\n}"];
+export function graphql(source: "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}"): (typeof documents)["query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -158,6 +172,10 @@ export function graphql(source: "query FindSocialLinks {\n  findSocialLinks {\n 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"): (typeof documents)["query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}"): (typeof documents)["query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

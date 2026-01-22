@@ -7,10 +7,11 @@ import {
 import Heading from '@/components/ui/elements/Heading';
 import { useTranslations } from 'next-intl';
 import ChangeEmailForm from './account/forms/ChangeEmailForm';
+import ChangePasswordForm from './account/forms/ChangePasswordForm';
+import WrapperTotp from './account/totp/WrapperTotp';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
-import ChangePasswordForm from './account/forms/ChangePasswordForm';
 
 const UserSettings = () => {
   const t = useTranslations('dashboard.settings');
@@ -59,6 +60,11 @@ const UserSettings = () => {
             />
             <ChangeEmailForm />
             <ChangePasswordForm />
+            <Heading
+              title={t('account.twoFactor.heading')}
+              description={t('account.twoFactor.description')}
+            />
+            <WrapperTotp />
           </div>
         </TabsContent>
         <TabsContent value='appearance'></TabsContent>
