@@ -15,6 +15,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": typeof types.CreateUserDocument,
+    "mutation DeactivateAccount($data: DeactivateAccountInput!) {\n  deactivateAccount(data: $data) {\n    user {\n      isDeactivated\n    }\n    message\n  }\n}": typeof types.DeactivateAccountDocument,
     "mutation LoginUser($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      username\n    }\n    message\n  }\n}": typeof types.LoginUserDocument,
     "mutation LogoutUser {\n  logout\n}": typeof types.LogoutUserDocument,
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": typeof types.NewPasswordDocument,
@@ -41,6 +42,7 @@ type Documents = {
 };
 const documents: Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": types.CreateUserDocument,
+    "mutation DeactivateAccount($data: DeactivateAccountInput!) {\n  deactivateAccount(data: $data) {\n    user {\n      isDeactivated\n    }\n    message\n  }\n}": types.DeactivateAccountDocument,
     "mutation LoginUser($data: LoginInput!) {\n  login(data: $data) {\n    user {\n      username\n    }\n    message\n  }\n}": types.LoginUserDocument,
     "mutation LogoutUser {\n  logout\n}": types.LogoutUserDocument,
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": types.NewPasswordDocument,
@@ -84,6 +86,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}"): (typeof documents)["mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation DeactivateAccount($data: DeactivateAccountInput!) {\n  deactivateAccount(data: $data) {\n    user {\n      isDeactivated\n    }\n    message\n  }\n}"): (typeof documents)["mutation DeactivateAccount($data: DeactivateAccountInput!) {\n  deactivateAccount(data: $data) {\n    user {\n      isDeactivated\n    }\n    message\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

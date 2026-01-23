@@ -8,6 +8,7 @@ import Heading from '@/components/ui/elements/Heading';
 import { useTranslations } from 'next-intl';
 import ChangeEmailForm from './account/forms/ChangeEmailForm';
 import ChangePasswordForm from './account/forms/ChangePasswordForm';
+import DeactivateCard from './account/totp/DeactivateCard';
 import WrapperTotp from './account/totp/WrapperTotp';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
@@ -60,11 +61,18 @@ const UserSettings = () => {
             />
             <ChangeEmailForm />
             <ChangePasswordForm />
+
             <Heading
               title={t('account.twoFactor.heading')}
               description={t('account.twoFactor.description')}
             />
             <WrapperTotp />
+
+            <Heading
+              title={t('account.deactivation.heading')}
+              description={t('account.deactivation.description')}
+            />
+            <DeactivateCard />
           </div>
         </TabsContent>
         <TabsContent value='appearance'></TabsContent>

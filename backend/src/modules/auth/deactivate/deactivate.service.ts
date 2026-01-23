@@ -8,6 +8,7 @@ import { verify } from 'argon2';
 import type { Request } from 'express';
 import { TokenType, User } from 'generated/prisma/client';
 import { PrismaService } from 'src/core/prisma/prisma.service';
+import { RedisService } from 'src/core/redis/redis.service';
 import { MailService } from 'src/modules/libs/mail/mail.service';
 import { TelegramService } from 'src/modules/libs/telegram/telegram.service';
 import { generateToken } from 'src/shared/utils/generate-token.util';
@@ -22,6 +23,7 @@ export class DeactivateService {
     private readonly configService: ConfigService,
     private readonly mailService: MailService,
     private readonly telegramService: TelegramService,
+    private readonly redisService: RedisService,
   ) {}
 
   public async deactivate(
@@ -85,7 +87,7 @@ export class DeactivateService {
       );
     }
 
-    await this.prismaService.user.update({
+    const user = await this.prismaService.user.update({
       where: {
         id: existingToken.userId,
       },
@@ -100,6 +102,8 @@ export class DeactivateService {
         id: existingToken.id,
       },
     });
+
+    await this.clearAllSessions(user.id);
 
     return await destroySession(req, this.configService);
   }
@@ -136,5 +140,39 @@ export class DeactivateService {
     }
 
     return true;
+  }
+
+  private async clearAllSessions(userId: string) {
+    const sessionPrefix =
+      this.configService.getOrThrow<string>('SESSION_PREFIX');
+    const keys = await this.redisService.keys(`${sessionPrefix}*`);
+
+    if (!keys.length) {
+      return;
+    }
+
+    const keysToDelete: string[] = [];
+
+    for (const key of keys) {
+      const sessionData = await this.redisService.get(key);
+
+      if (!sessionData) {
+        continue;
+      }
+
+      try {
+        const parsed = JSON.parse(sessionData) as { userId?: string };
+
+        if (parsed.userId === userId) {
+          keysToDelete.push(key);
+        }
+      } catch {
+        continue;
+      }
+    }
+
+    if (keysToDelete.length) {
+      await this.redisService.del(...keysToDelete);
+    }
   }
 }

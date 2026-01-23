@@ -123,7 +123,7 @@ export class SessionService {
       },
     });
 
-    if (!user) {
+    if (!user || user.isDeactivated) {
       throw new NotFoundException('Пользователь не найден');
     }
 

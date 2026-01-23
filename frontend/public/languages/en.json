@@ -98,6 +98,19 @@
       "submitButton": "Set new Password",
       "successMessage": "Password changed successfully",
       "errorMessage": "Error while setting the new password"
+    },
+    "deactivate": {
+      "heading": "Account Deactivation",
+      "backButtonLabel": "Go to Control Panel",
+      "pinLabel": "6-digit code",
+      "pinDescription": "A code has been sent to your email. If you enabled Telegram notifications, we have sent the code there as well",
+      "emailLabel": "Email",
+      "emailDescription": "The email address you entered during registration",
+      "passwordLabel": "Password",
+      "passwordDescription": "The password you entered during registration",
+      "submitButton": "Deactivate",
+      "successMessage": "You have successfully deactivated your account",
+      "errorMessage": "Error during deactivation"
     }
   },
 
