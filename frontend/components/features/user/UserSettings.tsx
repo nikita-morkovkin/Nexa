@@ -10,6 +10,8 @@ import ChangeEmailForm from './account/forms/ChangeEmailForm';
 import ChangePasswordForm from './account/forms/ChangePasswordForm';
 import DeactivateCard from './account/totp/DeactivateCard';
 import WrapperTotp from './account/totp/WrapperTotp';
+import ChangeLanguageForm from './appearance/forms/ChangeLanguageForm';
+import ChangeThemeForm from './appearance/forms/ChangeThemeForm';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
@@ -75,7 +77,16 @@ const UserSettings = () => {
             <DeactivateCard />
           </div>
         </TabsContent>
-        <TabsContent value='appearance'></TabsContent>
+        <TabsContent value='appearance' className='mt-6'>
+          <div className='space-y-6'>
+            <Heading
+              title={t('appearance.header.heading')}
+              description={t('appearance.header.description')}
+            />
+            <ChangeThemeForm />
+            <ChangeLanguageForm />
+          </div>
+        </TabsContent>
         <TabsContent value='notifications'></TabsContent>
         <TabsContent value='sessions'></TabsContent>
       </Tabs>

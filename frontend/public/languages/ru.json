@@ -233,7 +233,23 @@
           "deactivateButton": "Деактивировать"
         }
       },
-      "errorMessage": "Не удалось обновить почту"
+      "appearance": {
+        "header": {
+          "heading": "Внешний вид",
+          "description": "Настройте внешний вид интерфейса сайта по своему вкусу. Выберите тему и язык, которые сделают ваше взаимодействие более комфортным."
+        },
+        "theme": {
+          "heading": "Смена темы",
+          "description": "Вы можете выбрать темную или светлую тему для интерфейса сайта",
+          "successMessage": "Тема сайта успешно изменена"
+        },
+        "language": {
+          "heading": "Язык сайта",
+          "description": "Выберите язык, который будет использован на сайте",
+          "selectPlaceholder": "Выберите язык",
+          "successMessage": "Site language updated successfully"
+        }
+      }
     }
   },
 
