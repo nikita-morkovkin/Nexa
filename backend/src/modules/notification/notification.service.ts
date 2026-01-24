@@ -47,6 +47,35 @@ export class NotificationService {
     return notifications;
   }
 
+  public async findSettings(user: User) {
+    const notificationSettings =
+      await this.prismaService.notificationSettings.findUnique({
+        where: {
+          userId: user.id,
+        },
+        include: {
+          user: true,
+        },
+      });
+
+    if (notificationSettings) {
+      return notificationSettings;
+    }
+
+    return this.prismaService.notificationSettings.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+      include: {
+        user: true,
+      },
+    });
+  }
+
   public async createNewSponsorship(userId: string, plan: SponsorshipPlan) {
     await this.prismaService.notification.create({
       data: {
@@ -73,7 +102,7 @@ export class NotificationService {
   ) {
     const { siteNotifications, telegramNotifications } = input;
 
-    const notificationSettings =
+    const notificationsSettings =
       await this.prismaService.notificationSettings.upsert({
         where: {
           userId: user.id,
@@ -109,7 +138,7 @@ export class NotificationService {
       );
 
       return {
-        notificationSettings,
+        notificationsSettings,
         telegramAuthToken: tgAuthToken.token,
       };
     }
@@ -134,10 +163,10 @@ export class NotificationService {
           },
         });
 
-      return { notificationSettings: updatedSettings! };
+      return { notificationsSettings: updatedSettings! };
     }
 
-    return { notificationSettings };
+    return { notificationsSettings };
   }
 
   public async createStreamStart(userId: string, channel: User) {

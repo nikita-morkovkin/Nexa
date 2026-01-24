@@ -67,7 +67,7 @@ export class UserModel implements User {
   public notifications: NotificationModel[];
 
   @Field(() => NotificationsSettingsModel)
-  public notificationSettings: NotificationsSettingsModel;
+  public notificationsSettings: NotificationsSettingsModel;
 
   @Field(() => Date)
   public createdAt: Date;

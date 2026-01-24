@@ -163,7 +163,7 @@
             "titleDescription": "Link text",
             "urlLabel": "Link URL",
             "urlPlaceholder": "https://github.com/nikita-morkovkin",
-            "urlDescription": "Where does this link lead? Enter the full URL, for example https://github.com/TeaCoder52",
+            "urlDescription": "Where does this link lead? Enter the full URL, for example https://github.com/nikita-morkovkin",
             "submitButton": "Add",
             "successMessage": "Social media link added successfully"
           },
@@ -253,6 +253,22 @@
           "heading": "Accent color",
           "description": "Choose the color for website interface"
         }
+      },
+      "notifications": {
+        "header": {
+          "heading": "Notifications",
+          "description": "Configure how you want to receive notifications from Nexa. You will be notified about the start of broadcasts on channels you follow, as well as new subscribers."
+        },
+        "siteNotifications": {
+          "heading": "On-site Notifications",
+          "description": "If you disable on-site notifications, you will not receive alerts about new subscribers to your channel or notifications about new broadcasts."
+        },
+        "telegramNotifications": {
+          "heading": "Telegram Notifications",
+          "description": "If you enable Telegram notifications, your Nexa account will be linked to your Telegram account. You will receive messages about new subscriptions, new streams, password resets, and two-factor authentication codes."
+        },
+        "successMessage": "Notification settings updated successfully",
+        "errorMessage": "An error occurred while saving your settings. Please try again later."
       }
     }
   },

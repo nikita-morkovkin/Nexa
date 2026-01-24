@@ -1,0 +1,40 @@
+'use client';
+
+import {
+  ClearSessionCookieDocument,
+  FindNotificationsSettingsDocument,
+} from '@/graphql/gql/graphql';
+import { useMutation, useQuery } from '@apollo/client/react';
+import { useEffect } from 'react';
+import { useAuth } from './useAuth';
+
+export const useNotificationsSettings = () => {
+  const { isAuth, exit } = useAuth();
+
+  const { data, loading, refetch, error } = useQuery(
+    FindNotificationsSettingsDocument,
+    {
+      skip: !isAuth,
+    },
+  );
+
+  const [clearSessionCookie] = useMutation(ClearSessionCookieDocument);
+
+  useEffect(() => {
+    if (!error) {
+      return;
+    }
+
+    if (isAuth) {
+      clearSessionCookie();
+    }
+
+    exit();
+  }, [error, isAuth, clearSessionCookie, exit]);
+
+  return {
+    settings: data?.findNotificationsSettings ?? null,
+    isLoadingSettings: loading,
+    refetch,
+  };
+};

@@ -36,6 +36,7 @@ type Documents = {
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
     "mutation DisableTotp {\n  disableTotp\n}": typeof types.DisableTotpDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
+    "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": typeof types.FindNotificationsSettingsDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": typeof types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": typeof types.FindSocialLinksDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": typeof types.FindUnreadNotificationsCountDocument,
@@ -64,6 +65,7 @@ const documents: Documents = {
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
     "mutation DisableTotp {\n  disableTotp\n}": types.DisableTotpDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
+    "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": types.FindNotificationsSettingsDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": types.FindSocialLinksDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": types.FindUnreadNotificationsCountDocument,
@@ -172,6 +174,10 @@ export function graphql(source: "mutation DisableTotp {\n  disableTotp\n}"): (ty
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"): (typeof documents)["query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}"): (typeof documents)["query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

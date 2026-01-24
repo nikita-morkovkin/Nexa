@@ -1,0 +1,6 @@
+query FindNotificationsSettings {
+  findNotificationsSettings {
+    siteNotifications
+    telegramNotifications
+  }
+}

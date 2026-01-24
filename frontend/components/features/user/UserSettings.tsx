@@ -10,12 +10,13 @@ import ChangeEmailForm from './account/forms/ChangeEmailForm';
 import ChangePasswordForm from './account/forms/ChangePasswordForm';
 import DeactivateCard from './account/totp/DeactivateCard';
 import WrapperTotp from './account/totp/WrapperTotp';
+import ChangeColorForm from './appearance/forms/ChangeColorForm';
 import ChangeLanguageForm from './appearance/forms/ChangeLanguageForm';
 import ChangeThemeForm from './appearance/forms/ChangeThemeForm';
+import ChangeNotificationsSettingsForm from './notifications/forms/ChangeNotificationsSettingsForm';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
-import ChangeColorForm from './appearance/forms/ChangeColorForm';
 
 const UserSettings = () => {
   const t = useTranslations('dashboard.settings');
@@ -89,7 +90,15 @@ const UserSettings = () => {
             <ChangeColorForm />
           </div>
         </TabsContent>
-        <TabsContent value='notifications'></TabsContent>
+        <TabsContent value='notifications' className='mt-6'>
+          <div className='space-y-6'>
+            <Heading
+              title={t('notifications.header.heading')}
+              description={t('notifications.header.description')}
+            />
+            <ChangeNotificationsSettingsForm />
+          </div>
+        </TabsContent>
         <TabsContent value='sessions'></TabsContent>
       </Tabs>
     </div>

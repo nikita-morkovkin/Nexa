@@ -48,8 +48,8 @@ const ChannelAvatar = ({
         >
           <p
             className={cn(
-              'font-semibold mb-[5px]',
-              size === 'xl' && 'mb-[14px]',
+              'font-semibold flex items-center justify-center',
+              size === 'xl' && 'mb-2',
             )}
           >
             {channel.username?.[0]}

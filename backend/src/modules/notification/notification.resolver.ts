@@ -3,7 +3,10 @@ import type { User } from 'generated/prisma/client';
 import { Authorization } from 'src/shared/decorators/auth.decorator';
 import { Authorized } from 'src/shared/decorators/authorized.decorator';
 import { ChangeNotificationsSettingsInput } from './inputs/change-notification-settings.input';
-import { ChangeNotificationSettingsModel as ChangeNotificationsSettingsModel } from './models/notification-settings.model';
+import {
+  ChangeNotificationSettingsModel as ChangeNotificationsSettingsModel,
+  NotificationsSettingsModel,
+} from './models/notification-settings.model';
 import { NotificationModel } from './models/notification.model';
 import { NotificationService } from './notification.service';
 
@@ -23,6 +26,14 @@ export class NotificationResolver {
   @Authorization()
   public async findByUser(@Authorized() user: User) {
     return this.notificationService.findByUser(user);
+  }
+
+  @Query(() => NotificationsSettingsModel, {
+    name: 'findNotificationsSettings',
+  })
+  @Authorization()
+  public async findSettings(@Authorized() user: User) {
+    return this.notificationService.findSettings(user);
   }
 
   @Mutation(() => ChangeNotificationsSettingsModel, {

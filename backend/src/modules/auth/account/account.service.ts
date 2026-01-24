@@ -68,6 +68,12 @@ export class AccountService {
         password: hashedPassword,
         username,
         displayName: username,
+        notificationSettings: {
+          create: {
+            siteNotifications: false,
+            telegramNotifications: false,
+          },
+        },
         stream: {
           create: {
             title: `Стрим ${username}`,
