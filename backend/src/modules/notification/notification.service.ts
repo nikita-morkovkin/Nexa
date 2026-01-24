@@ -7,7 +7,7 @@ import {
 } from 'generated/prisma/client';
 import { PrismaService } from 'src/core/prisma/prisma.service';
 import { generateToken } from 'src/shared/utils/generate-token.util';
-import { ChangeNotificationSettingsInput } from './inputs/change-notification-settings.input';
+import { ChangeNotificationsSettingsInput } from './inputs/change-notification-settings.input';
 
 @Injectable()
 export class NotificationService {
@@ -69,7 +69,7 @@ export class NotificationService {
 
   public async changeSettings(
     user: User,
-    input: ChangeNotificationSettingsInput,
+    input: ChangeNotificationsSettingsInput,
   ) {
     const { siteNotifications, telegramNotifications } = input;
 

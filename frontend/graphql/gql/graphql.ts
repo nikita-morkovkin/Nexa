@@ -48,15 +48,15 @@ export type ChangeEmailInput = {
   email: Scalars['String']['input'];
 };
 
-export type ChangeNotificationSettingsInput = {
-  siteNotifications: Scalars['Boolean']['input'];
-  telegramNotifications: Scalars['Boolean']['input'];
-};
-
 export type ChangeNotificationSettingsModel = {
   __typename?: 'ChangeNotificationSettingsModel';
-  notificationSettings: NotificationSettingsModel;
+  notificationsSettings: NotificationsSettingsModel;
   telegramAuthToken?: Maybe<Scalars['String']['output']>;
+};
+
+export type ChangeNotificationsSettingsInput = {
+  siteNotifications: Scalars['Boolean']['input'];
+  telegramNotifications: Scalars['Boolean']['input'];
 };
 
 export type ChangePasswordInput = {
@@ -181,7 +181,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   changeChatSettings: Scalars['Boolean']['output'];
   changeEmail: Scalars['Boolean']['output'];
-  changeNotificationSettings: ChangeNotificationSettingsModel;
+  changeNotificationsSettings: ChangeNotificationSettingsModel;
   changePassword: Scalars['Boolean']['output'];
   changeProfileAvatar: Scalars['Boolean']['output'];
   changeProfileInfo: Scalars['Boolean']['output'];
@@ -225,8 +225,8 @@ export type MutationChangeEmailArgs = {
 };
 
 
-export type MutationChangeNotificationSettingsArgs = {
-  data: ChangeNotificationSettingsInput;
+export type MutationChangeNotificationsSettingsArgs = {
+  data: ChangeNotificationsSettingsInput;
 };
 
 
@@ -373,8 +373,16 @@ export type NotificationModel = {
   userId?: Maybe<Scalars['String']['output']>;
 };
 
-export type NotificationSettingsModel = {
-  __typename?: 'NotificationSettingsModel';
+export enum NotificationType {
+  EnableTwoFactorAuth = 'ENABLE_TWO_FACTOR_AUTH',
+  NewFollower = 'NEW_FOLLOWER',
+  NewSponsor = 'NEW_SPONSOR',
+  StreamStart = 'STREAM_START',
+  VerifiedChannel = 'VERIFIED_CHANNEL'
+}
+
+export type NotificationsSettingsModel = {
+  __typename?: 'NotificationsSettingsModel';
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ID']['output'];
   siteNotifications: Scalars['Boolean']['output'];
@@ -383,14 +391,6 @@ export type NotificationSettingsModel = {
   user: UserModel;
   userId: Scalars['ID']['output'];
 };
-
-export enum NotificationType {
-  EnableTwoFactorAuth = 'ENABLE_TWO_FACTOR_AUTH',
-  NewFollower = 'NEW_FOLLOWER',
-  NewSponsor = 'NEW_SPONSOR',
-  StreamStart = 'STREAM_START',
-  VerifiedChannel = 'VERIFIED_CHANNEL'
-}
 
 export type PlanModel = {
   __typename?: 'PlanModel';
@@ -427,7 +427,7 @@ export type Query = {
   findSessionByUser: Array<SessionModel>;
   findSocialLinks: Array<SocialLinkModel>;
   findSponsorsByChannel: Array<SubscriptionModel>;
-  findUnreadNotificationCount: Scalars['Int']['output'];
+  findUnreadNotificationsCount: Scalars['Int']['output'];
   generateTotp: TotpModel;
   getRandomFourStreams: Array<StreamModel>;
 };
@@ -589,7 +589,7 @@ export type UserModel = {
   isEmailVerified: Scalars['Boolean']['output'];
   isTotpEnabled: Scalars['Boolean']['output'];
   isVerified: Scalars['Boolean']['output'];
-  notificationSettings: NotificationSettingsModel;
+  notificationSettings: NotificationsSettingsModel;
   notifications: Array<NotificationModel>;
   socialLinks: Array<SocialLinkModel>;
   stream: StreamModel;
@@ -661,6 +661,13 @@ export type ChangeEmailUserMutationVariables = Exact<{
 
 
 export type ChangeEmailUserMutation = { __typename?: 'Mutation', changeEmail: boolean };
+
+export type ChangeNotificationsSettingsMutationVariables = Exact<{
+  data: ChangeNotificationsSettingsInput;
+}>;
+
+
+export type ChangeNotificationsSettingsMutation = { __typename?: 'Mutation', changeNotificationsSettings: { __typename?: 'ChangeNotificationSettingsModel', telegramAuthToken?: string | null, notificationsSettings: { __typename?: 'NotificationsSettingsModel', siteNotifications: boolean, telegramNotifications: boolean } } };
 
 export type ChangePasswordUserMutationVariables = Exact<{
   data: ChangePasswordInput;
@@ -752,7 +759,7 @@ export type FindSocialLinksQuery = { __typename?: 'Query', findSocialLinks: Arra
 export type FindUnreadNotificationsCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindUnreadNotificationsCountQuery = { __typename?: 'Query', findUnreadNotificationCount: number };
+export type FindUnreadNotificationsCountQuery = { __typename?: 'Query', findUnreadNotificationsCount: number };
 
 export type GenerateTotpSecretQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -769,6 +776,7 @@ export const ResetPasswordDocument = {"kind":"Document","definitions":[{"kind":"
 export const VerifyAccountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"VerifyAccount"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"VerificationInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"verifyAccount"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"isEmailVerified"}}]}}]}}]} as unknown as DocumentNode<VerifyAccountMutation, VerifyAccountMutationVariables>;
 export const ClearSessionCookieDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ClearSessionCookie"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"clearSessionCookie"}}]}}]} as unknown as DocumentNode<ClearSessionCookieMutation, ClearSessionCookieMutationVariables>;
 export const ChangeEmailUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangeEmailUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ChangeEmailInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"changeEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}]}]}}]} as unknown as DocumentNode<ChangeEmailUserMutation, ChangeEmailUserMutationVariables>;
+export const ChangeNotificationsSettingsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangeNotificationsSettings"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ChangeNotificationsSettingsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"changeNotificationsSettings"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"notificationsSettings"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"siteNotifications"}},{"kind":"Field","name":{"kind":"Name","value":"telegramNotifications"}}]}},{"kind":"Field","name":{"kind":"Name","value":"telegramAuthToken"}}]}}]}}]} as unknown as DocumentNode<ChangeNotificationsSettingsMutation, ChangeNotificationsSettingsMutationVariables>;
 export const ChangePasswordUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangePasswordUser"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ChangePasswordInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"changePassword"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}]}]}}]} as unknown as DocumentNode<ChangePasswordUserMutation, ChangePasswordUserMutationVariables>;
 export const ChangeProfileAvatarDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangeProfileAvatar"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"avatar"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"changeProfileAvatar"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"avatar"},"value":{"kind":"Variable","name":{"kind":"Name","value":"avatar"}}}]}]}}]} as unknown as DocumentNode<ChangeProfileAvatarMutation, ChangeProfileAvatarMutationVariables>;
 export const ChangeProfileInfoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChangeProfileInfo"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ChangeProfileInfoInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"changeProfileInfo"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}]}]}}]} as unknown as DocumentNode<ChangeProfileInfoMutation, ChangeProfileInfoMutationVariables>;
@@ -783,5 +791,5 @@ export const DisableTotpDocument = {"kind":"Document","definitions":[{"kind":"Op
 export const FindNotificationsByUserDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindNotificationsByUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findNotificationsByUser"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]}}]} as unknown as DocumentNode<FindNotificationsByUserQuery, FindNotificationsByUserQueryVariables>;
 export const FindCurrentProfileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindCurrentProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findCurrentProfile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"isTotpEnabled"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"Field","name":{"kind":"Name","value":"displayName"}},{"kind":"Field","name":{"kind":"Name","value":"isTotpEnabled"}}]}}]}}]} as unknown as DocumentNode<FindCurrentProfileQuery, FindCurrentProfileQueryVariables>;
 export const FindSocialLinksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindSocialLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findSocialLinks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"position"}}]}}]}}]} as unknown as DocumentNode<FindSocialLinksQuery, FindSocialLinksQueryVariables>;
-export const FindUnreadNotificationsCountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindUnreadNotificationsCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findUnreadNotificationCount"}}]}}]} as unknown as DocumentNode<FindUnreadNotificationsCountQuery, FindUnreadNotificationsCountQueryVariables>;
+export const FindUnreadNotificationsCountDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"FindUnreadNotificationsCount"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"findUnreadNotificationsCount"}}]}}]} as unknown as DocumentNode<FindUnreadNotificationsCountQuery, FindUnreadNotificationsCountQueryVariables>;
 export const GenerateTotpSecretDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GenerateTotpSecret"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"generateTotp"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"qrcode"}},{"kind":"Field","name":{"kind":"Name","value":"secret"}}]}}]}}]} as unknown as DocumentNode<GenerateTotpSecretQuery, GenerateTotpSecretQueryVariables>;

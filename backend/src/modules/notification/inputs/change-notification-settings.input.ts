@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class ChangeNotificationSettingsInput {
+export class ChangeNotificationsSettingsInput {
   @Field(() => Boolean)
   public siteNotifications: boolean;
 

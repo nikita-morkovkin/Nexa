@@ -23,6 +23,7 @@ type Documents = {
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
     "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}": typeof types.ChangeEmailUserDocument,
+    "mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}": typeof types.ChangeNotificationsSettingsDocument,
     "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": typeof types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": typeof types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": typeof types.ChangeProfileInfoDocument,
@@ -37,7 +38,7 @@ type Documents = {
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": typeof types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": typeof types.FindSocialLinksDocument,
-    "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": typeof types.FindUnreadNotificationsCountDocument,
+    "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": typeof types.FindUnreadNotificationsCountDocument,
     "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": typeof types.GenerateTotpSecretDocument,
 };
 const documents: Documents = {
@@ -50,6 +51,7 @@ const documents: Documents = {
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
     "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}": types.ChangeEmailUserDocument,
+    "mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}": types.ChangeNotificationsSettingsDocument,
     "mutation ChangePasswordUser($data: ChangePasswordInput!) {\n  changePassword(data: $data)\n}": types.ChangePasswordUserDocument,
     "mutation ChangeProfileAvatar($avatar: Upload!) {\n  changeProfileAvatar(avatar: $avatar)\n}": types.ChangeProfileAvatarDocument,
     "mutation ChangeProfileInfo($data: ChangeProfileInfoInput!) {\n  changeProfileInfo(data: $data)\n}": types.ChangeProfileInfoDocument,
@@ -64,7 +66,7 @@ const documents: Documents = {
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
     "query FindCurrentProfile {\n  findCurrentProfile {\n    username\n    email\n    isTotpEnabled\n    avatar\n    bio\n    displayName\n    isTotpEnabled\n  }\n}": types.FindCurrentProfileDocument,
     "query FindSocialLinks {\n  findSocialLinks {\n    id\n    title\n    url\n    position\n  }\n}": types.FindSocialLinksDocument,
-    "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}": types.FindUnreadNotificationsCountDocument,
+    "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": types.FindUnreadNotificationsCountDocument,
     "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": types.GenerateTotpSecretDocument,
 };
 
@@ -118,6 +120,10 @@ export function graphql(source: "mutation ClearSessionCookie {\n  clearSessionCo
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}"): (typeof documents)["mutation ChangeEmailUser($data: ChangeEmailInput!) {\n  changeEmail(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}"): (typeof documents)["mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -177,7 +183,7 @@ export function graphql(source: "query FindSocialLinks {\n  findSocialLinks {\n 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"): (typeof documents)["query FindUnreadNotificationsCount {\n  findUnreadNotificationCount\n}"];
+export function graphql(source: "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}"): (typeof documents)["query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import type { User } from 'generated/prisma/client';
 import { FollowModel } from 'src/modules/follow/models/follow.model';
-import { NotificationSettingsModel } from 'src/modules/notification/models/notification-settings.model';
+import { NotificationsSettingsModel } from 'src/modules/notification/models/notification-settings.model';
 import { NotificationModel } from 'src/modules/notification/models/notification.model';
 import { StreamModel } from '../../../stream/models/stream.model';
 import { SocialLinkModel } from '../../profile/models/social-link.model';
@@ -66,8 +66,8 @@ export class UserModel implements User {
   @Field(() => [NotificationModel])
   public notifications: NotificationModel[];
 
-  @Field(() => NotificationSettingsModel)
-  public notificationSettings: NotificationSettingsModel;
+  @Field(() => NotificationsSettingsModel)
+  public notificationSettings: NotificationsSettingsModel;
 
   @Field(() => Date)
   public createdAt: Date;

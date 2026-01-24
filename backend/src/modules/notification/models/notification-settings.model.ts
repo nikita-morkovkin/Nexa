@@ -3,7 +3,7 @@ import { NotificationSettings } from 'generated/prisma/client';
 import { UserModel } from 'src/modules/auth/account/models/user.model';
 
 @ObjectType()
-export class NotificationSettingsModel implements NotificationSettings {
+export class NotificationsSettingsModel implements NotificationSettings {
   @Field(() => ID)
   public userId: string;
 
@@ -28,8 +28,8 @@ export class NotificationSettingsModel implements NotificationSettings {
 
 @ObjectType()
 export class ChangeNotificationSettingsModel {
-  @Field(() => NotificationSettingsModel)
-  public notificationSettings: NotificationSettingsModel;
+  @Field(() => NotificationsSettingsModel)
+  public notificationsSettings: NotificationsSettingsModel;
 
   @Field(() => String, { nullable: true })
   public telegramAuthToken?: string;
