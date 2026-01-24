@@ -14,7 +14,7 @@ const ColorSwitcher = () => {
     });
 
     if (theme) {
-      return document.body.classList.add(`theme-${theme}`);
+      document.body.classList.add(`theme-${theme}`);
     }
   }, [theme]);
 
