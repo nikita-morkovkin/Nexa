@@ -14,7 +14,7 @@ const CardContainer = ({
   children,
 }: PropsWithChildren<CardContainerProps>) => {
   return (
-    <Card className='p-5'>
+    <Card className='p-6'>
       <div className='flex items-center justify-between'>
         <div className='space-y-1'>
           <h2 className='font-semibold tracking-wide'>{heading}</h2>

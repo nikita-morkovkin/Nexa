@@ -4,8 +4,8 @@ import CardContainer from '@/components/ui/elements/CardContainer';
 import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
 import { useTranslations } from 'next-intl';
 import WrapperTotpSkeleton from '../skeletons/WrapperTotpSkeleton';
-import EnableTotp from './EnableTotp';
 import DisableTotp from './DisableTotp';
+import EnableTotp from './EnableTotp';
 
 const WrapperTotp = () => {
   const t = useTranslations('dashboard.settings.account.twoFactor');
