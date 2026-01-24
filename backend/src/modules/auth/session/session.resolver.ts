@@ -12,7 +12,7 @@ export class SessionResolver {
   public constructor(private readonly sessionService: SessionService) {}
 
   @Authorization()
-  @Query(() => [SessionModel], { name: 'findSessionByUser' })
+  @Query(() => [SessionModel], { name: 'findSessionsByUser' })
   public async findSessionsByUser(@Context() { req }: GqlContext) {
     return await this.sessionService.findByUser(req);
   }

@@ -40,7 +40,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
             channel={channel}
             isLive={channel.stream.isLive}
           />
-          <h2 className='truncate pl-3 pb-1 pr-2'>{channel.username}</h2>
+          <h2 className='truncate pl-3 pr-2'>{channel.username}</h2>
           {channel.isVerified && <ChannelVerified size={'sm'} />}
           {channel.stream.isLive && (
             <div className='absolute right-5'>
@@ -57,13 +57,13 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       <Button
         asChild
         className={cn(
-          'h-11 w-full justify-center',
+          'h-11 w-full flex justify-center items-center',
           isActive && 'bg-accent text-accent-foreground',
         )}
         variant={'ghost'}
       >
         <Link
-          className='mt-3 flex w-full items-start'
+          className='mt-3 flex w-full items-center justify-center'
           href={`/${channel.username}`}
         >
           <ChannelAvatar channel={channel} isLive={channel.stream.isLive} />

@@ -48,7 +48,7 @@ const ChannelAvatar = ({
         >
           <p
             className={cn(
-              'font-semibold flex items-center justify-center',
+              'font-semibold mb-1',
               size === 'xl' && 'mb-2',
             )}
           >
