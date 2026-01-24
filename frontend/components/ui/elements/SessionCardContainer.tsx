@@ -15,40 +15,38 @@ interface CardContainerProps {
   isBetween?: boolean;
 }
 
-const CardContainer = ({
+const SessionCardContainer = ({
   heading,
   description,
   rightContent,
   Icon,
   children,
-  isBetween = true,
 }: PropsWithChildren<CardContainerProps>) => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
     <Card className='p-6'>
-      <div
-        className={cn(
-          'flex items-center',
-          isBetween ? 'justify-between' : 'justify-start gap-6',
-        )}
-      >
-        {Icon && (
-          <div className='rounded-full bg-foreground p-2.5'>
-            <Icon className={'size-7 text-secondary'} />
+      <div className={cn('flex items-center justify-between gap-6')}>
+        <div className='flex gap-x-6'>
+          {Icon && (
+            <div className='rounded-full bg-foreground p-2.5'>
+              <Icon className={'size-7 text-secondary'} />
+            </div>
+          )}
+          <div>
+            <h2 className='font-semibold tracking-wide'>{heading}</h2>
+            <p
+              className={cn(
+                'text-sm text-muted-foreground',
+                isMobile ? 'max-w-md' : 'max-w-xl',
+              )}
+            >
+              {description}
+            </p>
           </div>
-        )}
-        <div className='space-y-1'>
-          <h2 className='font-semibold tracking-wide'>{heading}</h2>
-          <p
-            className={cn(
-              'text-sm text-muted-foreground',
-              isMobile ? 'max-w-md' : 'max-w-xl',
-            )}
-          >
-            {description}
-          </p>
         </div>
+
+        <div className='space-y-1'></div>
         {rightContent && <div>{rightContent}</div>}
       </div>
       {children && <div className='mt-4'>{children}</div>}
@@ -56,4 +54,4 @@ const CardContainer = ({
   );
 };
 
-export default CardContainer;
+export default SessionCardContainer;

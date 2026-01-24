@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import { Switch } from '../common/Switch';
 import CardContainer from './CardContainer';
 
@@ -16,8 +15,7 @@ const ToggleCard = ({
   onChange,
   value,
   isDisabled,
-  children,
-}: PropsWithChildren<ToggleCardProps>) => {
+}: ToggleCardProps) => {
   return (
     <CardContainer
       heading={heading}

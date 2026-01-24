@@ -16,6 +16,7 @@ import ChangeThemeForm from './appearance/forms/ChangeThemeForm';
 import ChangeNotificationsSettingsForm from './notifications/forms/ChangeNotificationsSettingsForm';
 import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
+import SessionsList from './sessions/SessionsList';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
 
 const UserSettings = () => {
@@ -99,7 +100,16 @@ const UserSettings = () => {
             <ChangeNotificationsSettingsForm />
           </div>
         </TabsContent>
-        <TabsContent value='sessions'></TabsContent>
+        <TabsContent value='sessions' className='mt-5'>
+          <div className='space-y-6'>
+            <Heading
+              title={t('sessions.header.heading')}
+              description={t('sessions.header.description')}
+            />
+
+            <SessionsList />
+          </div>
+        </TabsContent>
       </Tabs>
     </div>
   );
