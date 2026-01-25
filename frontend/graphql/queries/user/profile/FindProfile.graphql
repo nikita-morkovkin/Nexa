@@ -7,6 +7,7 @@ query FindCurrentProfile {
     bio
     displayName
     isTotpEnabled
+    isVerified
     stream {
       serverUrl
       streamKey
