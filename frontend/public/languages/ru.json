@@ -370,6 +370,18 @@
       },
       "successMessage": "Настройки чата успешно обновлены",
       "errorMessage": "Ошибка при обновлении настроек чата"
+    },
+    "followers": {
+      "header": {
+        "heading": "Подписчики",
+        "description": "Список ваших подписчиков"
+      },
+      "columns": {
+        "date": "Дата подписки",
+        "user": "Пользователь",
+        "actions": "Действия",
+        "viewChannel": "Канал"
+      }
     }
   },
 
@@ -383,6 +395,9 @@
     },
     "copyButton": {
       "successMessage": "Скопировано"
+    },
+    "dataTable": {
+      "notFound": "Ничего не найдено"
     }
   },
   "utils": {
