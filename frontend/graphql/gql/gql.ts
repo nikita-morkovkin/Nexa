@@ -42,6 +42,7 @@ type Documents = {
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": typeof types.FindAllMyFollowersDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": typeof types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": typeof types.FindAllMySponsorsDocument,
+    "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": typeof types.FindAllMyTransactionsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
     "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": typeof types.FindNotificationsSettingsDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": typeof types.FindUnreadNotificationsCountDocument,
@@ -82,6 +83,7 @@ const documents: Documents = {
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": types.FindAllMyFollowersDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": types.FindAllMySponsorsDocument,
+    "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": types.FindAllMyTransactionsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
     "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": types.FindNotificationsSettingsDocument,
     "query FindUnreadNotificationsCount {\n  findUnreadNotificationsCount\n}": types.FindUnreadNotificationsCountDocument,
@@ -220,6 +222,10 @@ export function graphql(source: "query FindMySponsorshipPlans {\n  findMySponsor
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}"): (typeof documents)["query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}"): (typeof documents)["query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

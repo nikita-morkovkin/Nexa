@@ -430,6 +430,21 @@
         "successMessage": "Plan successfully deleted",
         "errorMessage": "Error deleting plan"
       }
+    },
+    "transactions": {
+      "header": {
+        "heading": "Transactions",
+        "description": "Transactions related to channel memberships are displayed here."
+      },
+      "columns": {
+        "date": "Creation Date",
+        "status": "Status",
+        "success": "Success",
+        "pending": "Pending",
+        "failed": "Failed",
+        "expired": "Expired",
+        "amount": "Amount"
+      }
     }
   },
 
