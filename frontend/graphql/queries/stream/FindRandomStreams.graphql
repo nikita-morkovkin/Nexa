@@ -1,0 +1,16 @@
+query FindRandomStreams {
+  getRandomFourStreams {
+    title
+    thumbnailUrl
+    isLive
+    user {
+      username
+      avatar
+      isVerified
+    }
+    category {
+      title
+      slug
+    }
+  }
+}

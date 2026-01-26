@@ -87,6 +87,48 @@ export class StreamService {
     return streams;
   }
 
+  private generateFakeStreams() {
+    const fakeData = [
+      {
+        title: 'Мы играем в Бравл Старс! Прокачка до 30 ранга',
+        category: { title: 'Brawl Stars', slug: 'brawl-stars' },
+        username: 'BrawlMaster',
+      },
+      {
+        title: 'Проходим GTA 6 | Первые миссии на ультрах',
+        category: { title: 'GTA VI', slug: 'gta-vi' },
+        username: 'RockstarGamer',
+      },
+      {
+        title: 'Утренний Чилл | Общаемся и смотрим видосы',
+        category: { title: 'Just Chatting', slug: 'just-chatting' },
+        username: 'StreamerGirl',
+      },
+      {
+        title: 'ФИНАЛ ТУРНИРА ПО COUNTER-STRIKE 2',
+        category: { title: 'Counter-Strike 2', slug: 'cs2' },
+        username: 'CyberPro',
+      },
+    ];
+
+    return fakeData.map((data, i) => ({
+      id: `fake-${i}`,
+      title: data.title,
+      thumbnailUrl: `https://picsum.photos/400/225?random=${i}`,
+      isLive: true,
+      user: {
+        id: `fake-user-${i}`,
+        username: data.username,
+        avatar: `https://api.dicebear.com/9.x/avataaars/svg?seed=${data.username}`,
+        isVerified: i % 2 === 0,
+      },
+      category: {
+        id: `fake-category-${i}`,
+        ...data.category,
+      },
+    }));
+  }
+
   public async changeStreamInfo(user: User, input: ChangeStreamInfoInput) {
     const { title, categoryId } = input;
 
@@ -193,8 +235,6 @@ export class StreamService {
     if (!channel) {
       throw new NotFoundException('Канал не найден');
     }
-
-    const isHost = self.id === channel.id;
 
     const token = new AccessToken(
       this.configService.getOrThrow<string>('LIVEKIT_API_KEY'),

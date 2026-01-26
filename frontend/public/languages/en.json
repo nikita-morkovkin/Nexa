@@ -49,7 +49,10 @@
   "recommended": {
     "heading": "Recommended"
   },
-
+  "home": {
+    "streamsHeading": "Channels, which you can like",
+    "categoriesHeading": "Categories, which you can like"
+  },
   "auth": {
     "register": {
       "heading": "Sign up for Nexa",
