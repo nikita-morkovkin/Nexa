@@ -38,7 +38,8 @@ type Documents = {
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": typeof types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": typeof types.UpdateSocialLinkDocument,
     "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": typeof types.EnableTotpDocument,
-    "query FindRandomCategories {\n  findRandomCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindRandomCategoriesDocument,
+    "query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindAllCategoriesDocument,
+    "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindRandomCategoriesDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": typeof types.FindAllMyFollowersDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": typeof types.FindMySponsorshipPlansDocument,
@@ -81,7 +82,8 @@ const documents: Documents = {
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": types.UpdateSocialLinkDocument,
     "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": types.EnableTotpDocument,
-    "query FindRandomCategories {\n  findRandomCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindRandomCategoriesDocument,
+    "query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindAllCategoriesDocument,
+    "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindRandomCategoriesDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": types.FindAllMyFollowersDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": types.FindMySponsorshipPlansDocument,
@@ -213,7 +215,11 @@ export function graphql(source: "mutation EnableTotp($data: EnableTotpInput!) {\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindRandomCategories {\n  findRandomCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}"): (typeof documents)["query FindRandomCategories {\n  findRandomCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}"];
+export function graphql(source: "query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}"): (typeof documents)["query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}"): (typeof documents)["query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

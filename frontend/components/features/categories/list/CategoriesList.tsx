@@ -1,11 +1,16 @@
 import EmptyState from '@/components/ui/elements/EmptyState';
 import Heading from '@/components/ui/elements/Heading';
-import { type FindRandomCategoriesQuery } from '@/graphql/gql/graphql';
+import {
+  type FindAllCategoriesQuery,
+  type FindRandomCategoriesQuery,
+} from '@/graphql/gql/graphql';
 import CategoryCard from './CategoryCard';
 
 interface CategoriesListProps {
   heading?: string;
-  categories: FindRandomCategoriesQuery['findRandomCategories'];
+  categories:
+    | FindRandomCategoriesQuery['findRandomCategories']
+    | FindAllCategoriesQuery['findAllCategories'];
 }
 
 const CategoriesList = ({ heading, categories }: CategoriesListProps) => {

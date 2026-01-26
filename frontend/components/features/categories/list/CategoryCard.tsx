@@ -1,6 +1,9 @@
 'use client';
 
-import { FindRandomCategoriesQuery } from '@/graphql/gql/graphql';
+import {
+  type FindAllCategoriesQuery,
+  type FindRandomCategoriesQuery,
+} from '@/graphql/gql/graphql';
 import { useSidebar } from '@/shared/hooks/useSidebar';
 import { getMediaSource } from '@/shared/utils/get-media-source.util';
 import { getRandomColor } from '@/shared/utils/get-random-color';
@@ -9,7 +12,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface CategoryCardProps {
-  category: FindRandomCategoriesQuery['findRandomCategories'][0];
+  category:
+    | FindRandomCategoriesQuery['findRandomCategories'][0]
+    | FindAllCategoriesQuery['findAllCategories'][0];
 }
 
 const CategoryCard = ({ category }: CategoryCardProps) => {
@@ -18,13 +23,13 @@ const CategoryCard = ({ category }: CategoryCardProps) => {
 
   return (
     <Link
-      href={`/category/${category.slug}`}
+      href={`/categories/${category.slug}`}
       className='h-full w-full space-y-3'
     >
       <div
         className={cn(
           'group relative cursor-pointer rounded-xl',
-          isOpen ? 'h-70' : 'h-78',
+          isOpen ? 'h-70' : 'h-66',
         )}
       >
         <div

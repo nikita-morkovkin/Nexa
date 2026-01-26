@@ -53,6 +53,10 @@
     "streamsHeading": "Channels, which you can like",
     "categoriesHeading": "Categories, which you can like"
   },
+  "categories": {
+    "heading": "Categories",
+    "description": "On this page you can find all stream categories"
+  },
   "auth": {
     "register": {
       "heading": "Sign up for Nexa",
