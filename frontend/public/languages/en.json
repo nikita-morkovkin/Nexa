@@ -55,7 +55,10 @@
   },
   "categories": {
     "heading": "Categories",
-    "description": "On this page you can find all stream categories"
+    "description": "On this page you can find all stream categories",
+    "overview": {
+      "heading": "Streams for this category"
+    }
   },
   "auth": {
     "register": {

@@ -1,4 +1,4 @@
-import CategoriesList from '@/components/features/categories/list/CategoriesList';
+import CategoriesList from '@/components/features/category/list/CategoriesList';
 import {
   FindAllCategoriesDocument,
   FindAllCategoriesQuery,
