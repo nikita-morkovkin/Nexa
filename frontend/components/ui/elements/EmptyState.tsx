@@ -4,7 +4,7 @@ import { SearchX } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 const EmptyState = () => {
-  const t = useTranslations('components.empty.state');
+  const t = useTranslations('components.emptyState');
 
   return (
     <div className='flex h-[75vh] w-full flex-col items-center justify-center'>

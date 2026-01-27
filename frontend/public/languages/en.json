@@ -60,6 +60,11 @@
       "heading": "Streams for this category"
     }
   },
+  "streams": {
+    "heading": "Streams",
+    "searchHeading": "Search results",
+    "description": "All the streams at the website"
+  },
   "auth": {
     "register": {
       "heading": "Sign up for Nexa",

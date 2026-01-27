@@ -46,6 +46,7 @@ type Documents = {
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": typeof types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": typeof types.FindAllMySponsorsDocument,
     "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": typeof types.FindAllMyTransactionsDocument,
+    "query FindAllStreams($filters: FiltersInput!) {\n  findAllStreams(filters: $filters) {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}": typeof types.FindAllStreamsDocument,
     "query FindRandomStreams {\n  getRandomFourStreams {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}": typeof types.FindRandomStreamsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": typeof types.FindNotificationsByUserDocument,
     "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": typeof types.FindNotificationsSettingsDocument,
@@ -91,6 +92,7 @@ const documents: Documents = {
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": types.FindAllMySponsorsDocument,
     "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": types.FindAllMyTransactionsDocument,
+    "query FindAllStreams($filters: FiltersInput!) {\n  findAllStreams(filters: $filters) {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}": types.FindAllStreamsDocument,
     "query FindRandomStreams {\n  getRandomFourStreams {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}": types.FindRandomStreamsDocument,
     "query FindNotificationsByUser {\n  findNotificationsByUser {\n    id\n    message\n    type\n    createdAt\n  }\n}": types.FindNotificationsByUserDocument,
     "query FindNotificationsSettings {\n  findNotificationsSettings {\n    siteNotifications\n    telegramNotifications\n  }\n}": types.FindNotificationsSettingsDocument,
@@ -246,6 +248,10 @@ export function graphql(source: "query FindAllMySponsors {\n  findAllMySponsors 
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}"): (typeof documents)["query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindAllStreams($filters: FiltersInput!) {\n  findAllStreams(filters: $filters) {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}"): (typeof documents)["query FindAllStreams($filters: FiltersInput!) {\n  findAllStreams(filters: $filters) {\n    title\n    thumbnailUrl\n    isLive\n    user {\n      username\n      avatar\n      isVerified\n    }\n    category {\n      title\n      slug\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

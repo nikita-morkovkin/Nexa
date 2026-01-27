@@ -61,6 +61,11 @@
       "heading": "Стримы к этой категории"
     }
   },
+  "streams": {
+    "heading": "Трансляции",
+    "searchHeading": "Поиск по запросу",
+    "description": "Все стримы на сайте"
+  },
   "auth": {
     "register": {
       "heading": "Регистрация в Nexa",
