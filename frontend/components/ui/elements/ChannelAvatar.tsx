@@ -18,18 +18,22 @@ const avatarSizes = cva('', {
   },
 });
 
+type TextSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
 interface ChannelAvatarProps extends VariantProps<typeof avatarSizes> {
   channel: Pick<
     FindCurrentProfileQuery['findCurrentProfile'],
     'username' | 'avatar'
   >;
   isLive?: boolean;
+  textSize?: TextSize;
 }
 
 const ChannelAvatar = ({
   channel,
   size,
   isLive = false,
+  textSize,
 }: ChannelAvatarProps) => {
   return (
     <div className='relative'>
@@ -51,6 +55,11 @@ const ChannelAvatar = ({
               'font-semibold mb-1',
               size === 'xl' && 'mb-2',
               size === 'sm' && 'mb-0',
+              textSize === 'sm' && 'text-sm',
+              textSize === 'md' && 'text-md',
+              textSize === 'lg' && 'text-lg',
+              textSize === 'xl' && 'text-xl',
+              textSize === '2xl' && 'text-2xl',
             )}
           >
             {channel.username?.[0]}

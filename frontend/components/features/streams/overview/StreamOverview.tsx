@@ -5,6 +5,7 @@ import { LIVEKIT_SERVER_URL } from '@/shared/constants/url.constants';
 import { useStreamToken } from '@/shared/hooks/useStreamToken';
 import { LiveKitRoom } from '@livekit/components-react';
 import StreamOverviewSkeleton from '../skeletons/StreamOverviewSkeleton';
+import StreamInfo from './info/StreamInfo';
 import StreamVideo from './player/StreamVideo';
 interface StreamOverviewProps {
   channel: FindChannelByUsernameQuery['findChannelByUsername'];
@@ -25,6 +26,7 @@ const StreamOverview = ({ channel }: StreamOverviewProps) => {
     >
       <div className='order-1 col-span flex flex-col lg:col-span-5'>
         <StreamVideo channel={channel} />
+        <StreamInfo channel={channel} />
       </div>
       <div className='order-2 col-span-1 flex h-80 flex-col space-y-6 lg:col-span-2'>
         Chat
