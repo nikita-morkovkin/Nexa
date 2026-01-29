@@ -21,6 +21,8 @@ type Documents = {
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": typeof types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
+    "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}": typeof types.SubscribeToChannelDocument,
+    "mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}": typeof types.UnsubscribeFromChannelDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
     "mutation RemoveSession($id: String!) {\n  removeSession(id: $id)\n}": typeof types.RemoveSessionDocument,
     "mutation CreateSponsorshipPlan($data: CreatePlanInput!) {\n  createSponsorshipPlan(data: $data)\n}": typeof types.CreateSponsorshipPlanDocument,
@@ -45,6 +47,7 @@ type Documents = {
     "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n  }\n}": typeof types.FindChannelByUsernameDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": typeof types.FindAllMyFollowersDocument,
+    "query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}": typeof types.FindAllMyFollowingsDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": typeof types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": typeof types.FindAllMySponsorsDocument,
     "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": typeof types.FindAllMyTransactionsDocument,
@@ -69,6 +72,8 @@ const documents: Documents = {
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
+    "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}": types.SubscribeToChannelDocument,
+    "mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}": types.UnsubscribeFromChannelDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
     "mutation RemoveSession($id: String!) {\n  removeSession(id: $id)\n}": types.RemoveSessionDocument,
     "mutation CreateSponsorshipPlan($data: CreatePlanInput!) {\n  createSponsorshipPlan(data: $data)\n}": types.CreateSponsorshipPlanDocument,
@@ -93,6 +98,7 @@ const documents: Documents = {
     "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n  }\n}": types.FindChannelByUsernameDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": types.FindAllMyFollowersDocument,
+    "query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}": types.FindAllMyFollowingsDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": types.FindMySponsorshipPlansDocument,
     "query FindAllMySponsors {\n  findAllMySponsors {\n    expiresAt\n    user {\n      username\n      avatar\n      isVerified\n    }\n    plan {\n      title\n    }\n  }\n}": types.FindAllMySponsorsDocument,
     "query FindAllMyTransactions {\n  findMyTransactions {\n    createdAt\n    status\n    amount\n  }\n}": types.FindAllMyTransactionsDocument,
@@ -152,6 +158,14 @@ export function graphql(source: "mutation ResetPassword($data: ResetPasswordInpu
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}"): (typeof documents)["mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}"): (typeof documents)["mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}"): (typeof documents)["mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -248,6 +262,10 @@ export function graphql(source: "query FindRecommendedChannels {\n  findRecommen
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}"): (typeof documents)["query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}"): (typeof documents)["query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -19,13 +19,13 @@ export class FollowService {
   public async findAllMyFollowings(user: User) {
     const myFollowings = await this.prismaService.follow.findMany({
       where: {
-        followingId: user.id,
+        followerId: user.id,
       },
       orderBy: {
         createdAt: 'desc',
       },
       include: {
-        follower: true,
+        following: true,
       },
     });
 
@@ -35,13 +35,13 @@ export class FollowService {
   public async findAllMyFollowers(user: User) {
     const myFollowers = await this.prismaService.follow.findMany({
       where: {
-        followerId: user.id,
+        followingId: user.id,
       },
       orderBy: {
         createdAt: 'desc',
       },
       include: {
-        following: true,
+        follower: true,
       },
     });
 

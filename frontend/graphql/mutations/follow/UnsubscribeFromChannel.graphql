@@ -1,0 +1,3 @@
+mutation UnsubscribeFromChannel($channelId: String!) {
+  unsubscribeFromChannel(channelId: $channelId)
+}

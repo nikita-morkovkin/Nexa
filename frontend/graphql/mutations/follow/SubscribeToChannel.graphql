@@ -1,0 +1,3 @@
+mutation SubscribeToChannel($channelId: String!) {
+  subscribeToChannel(channelId: $channelId)
+}

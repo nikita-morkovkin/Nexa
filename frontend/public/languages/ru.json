@@ -84,14 +84,14 @@
     },
     "actions": {
       "follow": {
-        "confirmUnfollowHeading": "Перестать отслеживать",
+        "confirmUnfollowHeading": "Отписаться",
         "confirmUnfollowMessage": "Вы больше не будете получить уведомления от этого канала и он пропадет из списка отслеживаемых",
-        "unfollowButton": "Перестать отслеживать",
-        "followButton": "Отслеживать",
+        "unfollowButton": "Отписаться",
+        "followButton": "Подписаться",
         "successFollowMessage": "Вы успешно подписались",
         "errorFollowMessage": "Ошибка при подписке",
-        "successUnfollowMessage": "Вы успешно описались",
-        "errorUnfollowMessage": "Ошибка при описке"
+        "successUnfollowMessage": "Вы успешно отписались",
+        "errorUnfollowMessage": "Ошибка при отписке"
       },
       "support": {
         "alreadySponsor": "Вы уже спонсор",

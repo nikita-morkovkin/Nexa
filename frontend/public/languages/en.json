@@ -83,10 +83,10 @@
     },
     "actions": {
       "follow": {
-        "confirmUnfollowHeading": "Unfollow",
+        "confirmUnfollowHeading": "Unsubscribe",
         "confirmUnfollowMessage": "You will no longer receive notifications from this channel and it will be removed from your following list",
-        "unfollowButton": "Unfollow",
-        "followButton": "Follow",
+        "unfollowButton": "Unsubscribe",
+        "followButton": "Subscribe",
         "successFollowMessage": "Successfully followed",
         "errorFollowMessage": "Error while following",
         "successUnfollowMessage": "Successfully unfollowed",
