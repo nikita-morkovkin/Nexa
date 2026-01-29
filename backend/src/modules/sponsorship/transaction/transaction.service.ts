@@ -83,7 +83,7 @@ export class TransactionService {
       ],
       mode: 'subscription',
       success_url: `${this.configService.getOrThrow('ALLOWED_ORIGINS')}
-      /success?price=${encodeURIComponent(plan.title)}
+      /success?price=${encodeURIComponent(plan.price)}
       &username=${encodeURIComponent(user.username)}`,
       cancel_url: `${this.configService.getOrThrow('ALLOWED_ORIGINS')}`,
       customer: customer.id,

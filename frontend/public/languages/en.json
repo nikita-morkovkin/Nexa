@@ -129,6 +129,19 @@
       }
     }
   },
+"success": {
+    "heading": "Payment successful!",
+    "details": {
+      "heading": "Sponsorship details:",
+      "price": "Price:",
+      "duration": "Duration:",
+      "channel": "Channel:"
+    },
+    "congratulations": "You now have access to the channel's premium content!",
+    "backToHome": "Back to home",
+    "backToChannel": "Back to channel",
+    "support": "If you have any questions, please contact our support."
+  },
   "auth": {
     "register": {
       "heading": "Sign up for Nexa",
