@@ -7,6 +7,7 @@ import { LiveKitRoom } from '@livekit/components-react';
 import StreamOverviewSkeleton from '../skeletons/StreamOverviewSkeleton';
 import StreamInfo from './info/StreamInfo';
 import StreamVideo from './player/StreamVideo';
+
 interface StreamOverviewProps {
   channel: FindChannelByUsernameQuery['findChannelByUsername'];
 }
@@ -15,7 +16,7 @@ const StreamOverview = ({ channel }: StreamOverviewProps) => {
   const { token, name, identity } = useStreamToken(channel.id);
 
   if (!token || !name || !identity) {
-    <StreamOverviewSkeleton />;
+    return <StreamOverviewSkeleton />;
   }
 
   return (
