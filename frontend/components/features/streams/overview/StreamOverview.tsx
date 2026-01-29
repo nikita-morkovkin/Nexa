@@ -6,6 +6,7 @@ import { useStreamToken } from '@/shared/hooks/useStreamToken';
 import { LiveKitRoom } from '@livekit/components-react';
 import StreamOverviewSkeleton from '../skeletons/StreamOverviewSkeleton';
 import AboutChannel from './info/AboutChannel';
+import ChannelSponsors from './info/ChannelSponsors';
 import StreamInfo from './info/StreamInfo';
 import StreamVideo from './player/StreamVideo';
 
@@ -30,6 +31,7 @@ const StreamOverview = ({ channel }: StreamOverviewProps) => {
         <StreamVideo channel={channel} />
         <StreamInfo channel={channel} />
         <AboutChannel channel={channel} />
+        <ChannelSponsors channel={channel} />
       </div>
       <div className='order-2 col-span-1 flex h-80 flex-col space-y-6 lg:col-span-2'>
         Chat
