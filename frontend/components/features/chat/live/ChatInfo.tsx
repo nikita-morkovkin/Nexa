@@ -1,0 +1,53 @@
+import { useAuth } from '@/shared/hooks/useAuth';
+import { Info } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+
+interface ChatInfoProps {
+  isOurChannel: boolean;
+  isSponsor: boolean;
+  isChatEnabled: boolean;
+  isChatFollowersOnly: boolean;
+  isChatPremiumFollowersOnly: boolean;
+}
+
+const ChatInfo = ({
+  isChatEnabled,
+  isChatFollowersOnly,
+  isChatPremiumFollowersOnly,
+  isOurChannel,
+  isSponsor,
+}: ChatInfoProps) => {
+  const t = useTranslations('stream.chat.info');
+  const { isAuth } = useAuth();
+
+  let message = '';
+
+  if (!isAuth) {
+    message = t('authRequired');
+  } else if (isOurChannel) {
+    return null;
+  } else if (!isChatEnabled) {
+    message = t('chatDisabled');
+  } else if (isChatPremiumFollowersOnly && !isSponsor) {
+    message = t('premiumFOllowersOnly');
+  } else if (isChatFollowersOnly) {
+    message = t('followersOnly');
+  } else {
+    return null;
+  }
+
+  return (
+    <div
+      className={`
+        mt-2 flex h-10 w-full 
+        items-center gap-x-2 rounded-md 
+        border bg-accent px-3 
+        text-muted-foreground`}
+    >
+      <Info className='size-4' />
+      <p className='text-sm font-semibold'>{message}</p>
+    </div>
+  );
+};
+
+export default ChatInfo;

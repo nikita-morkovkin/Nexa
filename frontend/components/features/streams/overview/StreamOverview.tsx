@@ -4,6 +4,7 @@ import { type FindChannelByUsernameQuery } from '@/graphql/gql/graphql';
 import { LIVEKIT_SERVER_URL } from '@/shared/constants/url.constants';
 import { useStreamToken } from '@/shared/hooks/useStreamToken';
 import { LiveKitRoom } from '@livekit/components-react';
+import LiveChat from '../../chat/live/LiveChat';
 import StreamOverviewSkeleton from '../skeletons/StreamOverviewSkeleton';
 import AboutChannel from './info/AboutChannel';
 import ChannelSponsors from './info/ChannelSponsors';
@@ -34,7 +35,12 @@ const StreamOverview = ({ channel }: StreamOverviewProps) => {
         <ChannelSponsors channel={channel} />
       </div>
       <div className='order-2 col-span-1 flex h-80 flex-col space-y-6 lg:col-span-2'>
-        Chat
+        <LiveChat
+          channel={channel}
+          isChatEnabled={channel.stream.isChatEnabled}
+          isChatFollowersOnly={channel.stream.isChatFollowersOnly}
+          isChatPremiumFollowersOnly={channel.stream.isChatPremiumFollowersOnly}
+        />
       </div>
     </LiveKitRoom>
   );

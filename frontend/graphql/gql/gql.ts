@@ -21,6 +21,8 @@ type Documents = {
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": typeof types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": typeof types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": typeof types.VerifyAccountDocument,
+    "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}": typeof types.ChangeChatSettingsDocument,
+    "mutation SendChatMessage($data: SendMessageInput!) {\n  sendMessage(data: $data) {\n    streamId\n  }\n}": typeof types.SendChatMessageDocument,
     "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}": typeof types.SubscribeToChannelDocument,
     "mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}": typeof types.UnsubscribeFromChannelDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": typeof types.ClearSessionCookieDocument,
@@ -28,7 +30,6 @@ type Documents = {
     "mutation CreateSponsorshipPlan($data: CreatePlanInput!) {\n  createSponsorshipPlan(data: $data)\n}": typeof types.CreateSponsorshipPlanDocument,
     "mutation RemoveSponsorshipPlan($planId: String!) {\n  removeSponsorshipPlan(planId: $planId)\n}": typeof types.RemoveSponsorshipPlanDocument,
     "mutation MakePayment($planId: String!) {\n  makePayment(planId: $planId) {\n    url\n  }\n}": typeof types.MakePaymentDocument,
-    "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}": typeof types.ChangeChatSettingsDocument,
     "mutation CreateIngress($ingressType: IngressInput!) {\n  createIngress(ingressType: $ingressType)\n}": typeof types.CreateIngressDocument,
     "mutation GenerateStreamToken($data: GenerateStreamTokenInput!) {\n  generateStreamToken(data: $data) {\n    token\n  }\n}": typeof types.GenerateStreamTokenDocument,
     "mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}": typeof types.ChangeNotificationsSettingsDocument,
@@ -45,9 +46,10 @@ type Documents = {
     "query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindAllCategoriesDocument,
     "query FindCategoryBySlug($slug: String!) {\n  findCategoryBySlug(slug: $slug) {\n    title\n    thumbnailUrl\n    description\n    streams {\n      title\n      thumbnailUrl\n      isLive\n      user {\n        username\n        avatar\n        isVerified\n      }\n      category {\n        title\n        slug\n      }\n    }\n  }\n}": typeof types.FindCategoryBySlugDocument,
     "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindRandomCategoriesDocument,
-    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": typeof types.FindChannelByUsernameDocument,
+    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": typeof types.FindChannelByUsernameDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": typeof types.FindRecommendedChannelsDocument,
     "query FindSponsorsByChannel($channelId: String!) {\n  findSponsorsByChannel(channelId: $channelId) {\n    user {\n      username\n      id\n      avatar\n    }\n  }\n}": typeof types.FindSponsorsByChannelDocument,
+    "query FindAllMessagesByStream($streamId: String!) {\n  findAllMessagesByStream(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}": typeof types.FindAllMessagesByStreamDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": typeof types.FindAllMyFollowersDocument,
     "query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}": typeof types.FindAllMyFollowingsDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": typeof types.FindMySponsorshipPlansDocument,
@@ -65,6 +67,7 @@ type Documents = {
     "query FindStreamInfo {\n  findCurrentProfile {\n    stream {\n      serverUrl\n      streamKey\n    }\n  }\n}": typeof types.FindStreamInfoDocument,
     "mutation DisableTotp {\n  disableTotp\n}": typeof types.DisableTotpDocument,
     "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": typeof types.GenerateTotpSecretDocument,
+    "subscription ChatMessageAdded($streamId: String!) {\n  chatMessageAdded(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}": typeof types.ChatMessageAddedDocument,
 };
 const documents: Documents = {
     "mutation CreateUser($data: CreateUserInput!) {\n  createUser(data: $data)\n}": types.CreateUserDocument,
@@ -74,6 +77,8 @@ const documents: Documents = {
     "mutation NewPassword($data: NewPasswordInput!) {\n  newPassword(data: $data)\n}": types.NewPasswordDocument,
     "mutation ResetPassword($data: ResetPasswordInput!) {\n  resetPassword(data: $data)\n}": types.ResetPasswordDocument,
     "mutation VerifyAccount($data: VerificationInput!) {\n  verifyAccount(data: $data) {\n    isEmailVerified\n  }\n}": types.VerifyAccountDocument,
+    "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}": types.ChangeChatSettingsDocument,
+    "mutation SendChatMessage($data: SendMessageInput!) {\n  sendMessage(data: $data) {\n    streamId\n  }\n}": types.SendChatMessageDocument,
     "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}": types.SubscribeToChannelDocument,
     "mutation UnsubscribeFromChannel($channelId: String!) {\n  unsubscribeFromChannel(channelId: $channelId)\n}": types.UnsubscribeFromChannelDocument,
     "mutation ClearSessionCookie {\n  clearSessionCookie\n}": types.ClearSessionCookieDocument,
@@ -81,7 +86,6 @@ const documents: Documents = {
     "mutation CreateSponsorshipPlan($data: CreatePlanInput!) {\n  createSponsorshipPlan(data: $data)\n}": types.CreateSponsorshipPlanDocument,
     "mutation RemoveSponsorshipPlan($planId: String!) {\n  removeSponsorshipPlan(planId: $planId)\n}": types.RemoveSponsorshipPlanDocument,
     "mutation MakePayment($planId: String!) {\n  makePayment(planId: $planId) {\n    url\n  }\n}": types.MakePaymentDocument,
-    "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}": types.ChangeChatSettingsDocument,
     "mutation CreateIngress($ingressType: IngressInput!) {\n  createIngress(ingressType: $ingressType)\n}": types.CreateIngressDocument,
     "mutation GenerateStreamToken($data: GenerateStreamTokenInput!) {\n  generateStreamToken(data: $data) {\n    token\n  }\n}": types.GenerateStreamTokenDocument,
     "mutation ChangeNotificationsSettings($data: ChangeNotificationsSettingsInput!) {\n  changeNotificationsSettings(data: $data) {\n    notificationsSettings {\n      siteNotifications\n      telegramNotifications\n    }\n    telegramAuthToken\n  }\n}": types.ChangeNotificationsSettingsDocument,
@@ -98,9 +102,10 @@ const documents: Documents = {
     "query FindAllCategories {\n  findAllCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindAllCategoriesDocument,
     "query FindCategoryBySlug($slug: String!) {\n  findCategoryBySlug(slug: $slug) {\n    title\n    thumbnailUrl\n    description\n    streams {\n      title\n      thumbnailUrl\n      isLive\n      user {\n        username\n        avatar\n        isVerified\n      }\n      category {\n        title\n        slug\n      }\n    }\n  }\n}": types.FindCategoryBySlugDocument,
     "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindRandomCategoriesDocument,
-    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": types.FindChannelByUsernameDocument,
+    "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": types.FindChannelByUsernameDocument,
     "query FindRecommendedChannels {\n  findRecommendedChannels {\n    username\n    avatar\n    isVerified\n    stream {\n      isLive\n    }\n  }\n}": types.FindRecommendedChannelsDocument,
     "query FindSponsorsByChannel($channelId: String!) {\n  findSponsorsByChannel(channelId: $channelId) {\n    user {\n      username\n      id\n      avatar\n    }\n  }\n}": types.FindSponsorsByChannelDocument,
+    "query FindAllMessagesByStream($streamId: String!) {\n  findAllMessagesByStream(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}": types.FindAllMessagesByStreamDocument,
     "query FindAllMyFollowers {\n  findAllMyFollowers {\n    createdAt\n    followerUser {\n      username\n      avatar\n      isVerified\n    }\n  }\n}": types.FindAllMyFollowersDocument,
     "query FindAllMyFollowings {\n  findAllMyFollowings {\n    createdAt\n    followingId\n  }\n}": types.FindAllMyFollowingsDocument,
     "query FindMySponsorshipPlans {\n  findMySponsorshipPlans {\n    id\n    createdAt\n    title\n    price\n  }\n}": types.FindMySponsorshipPlansDocument,
@@ -118,6 +123,7 @@ const documents: Documents = {
     "query FindStreamInfo {\n  findCurrentProfile {\n    stream {\n      serverUrl\n      streamKey\n    }\n  }\n}": types.FindStreamInfoDocument,
     "mutation DisableTotp {\n  disableTotp\n}": types.DisableTotpDocument,
     "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}": types.GenerateTotpSecretDocument,
+    "subscription ChatMessageAdded($streamId: String!) {\n  chatMessageAdded(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}": types.ChatMessageAddedDocument,
 };
 
 /**
@@ -165,6 +171,14 @@ export function graphql(source: "mutation VerifyAccount($data: VerificationInput
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
+export function graphql(source: "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}"): (typeof documents)["mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation SendChatMessage($data: SendMessageInput!) {\n  sendMessage(data: $data) {\n    streamId\n  }\n}"): (typeof documents)["mutation SendChatMessage($data: SendMessageInput!) {\n  sendMessage(data: $data) {\n    streamId\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
 export function graphql(source: "mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}"): (typeof documents)["mutation SubscribeToChannel($channelId: String!) {\n  subscribeToChannel(channelId: $channelId)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -190,10 +204,6 @@ export function graphql(source: "mutation RemoveSponsorshipPlan($planId: String!
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "mutation MakePayment($planId: String!) {\n  makePayment(planId: $planId) {\n    url\n  }\n}"): (typeof documents)["mutation MakePayment($planId: String!) {\n  makePayment(planId: $planId) {\n    url\n  }\n}"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}"): (typeof documents)["mutation ChangeChatSettings($data: ChangeChatSettingsInput!) {\n  changeChatSettings(data: $data)\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -261,7 +271,7 @@ export function graphql(source: "query FindRandomCategories {\n  findRandomCateg
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}"): (typeof documents)["query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      title\n      thumbnailUrl\n      isLive\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}"];
+export function graphql(source: "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}"): (typeof documents)["query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -270,6 +280,10 @@ export function graphql(source: "query FindRecommendedChannels {\n  findRecommen
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query FindSponsorsByChannel($channelId: String!) {\n  findSponsorsByChannel(channelId: $channelId) {\n    user {\n      username\n      id\n      avatar\n    }\n  }\n}"): (typeof documents)["query FindSponsorsByChannel($channelId: String!) {\n  findSponsorsByChannel(channelId: $channelId) {\n    user {\n      username\n      id\n      avatar\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query FindAllMessagesByStream($streamId: String!) {\n  findAllMessagesByStream(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}"): (typeof documents)["query FindAllMessagesByStream($streamId: String!) {\n  findAllMessagesByStream(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -338,6 +352,10 @@ export function graphql(source: "mutation DisableTotp {\n  disableTotp\n}"): (ty
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}"): (typeof documents)["query GenerateTotpSecret {\n  generateTotp {\n    qrcode\n    secret\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "subscription ChatMessageAdded($streamId: String!) {\n  chatMessageAdded(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}"): (typeof documents)["subscription ChatMessageAdded($streamId: String!) {\n  chatMessageAdded(streamId: $streamId) {\n    createdAt\n    text\n    user {\n      id\n      username\n    }\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

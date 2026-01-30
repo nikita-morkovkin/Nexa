@@ -8,7 +8,7 @@ import { ChangeChatSettingsDocument } from '@/graphql/gql/graphql';
 import {
   changeChatSettingsSchema,
   TypeChangeChatSettingsSchema,
-} from '@/schemas/stream/change-chat-settings.schema';
+} from '@/schemas/chat/change-chat-settings.schema';
 import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
 import { useMutation } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -102,7 +102,11 @@ const ChangeChatSettings = () => {
                 <ToggleCard
                   heading={t('isChatPremiumFollowersOnly.heading')}
                   description={t('isChatPremiumFollowersOnly.description')}
-                  isDisabled={isLoadingChatSettings || isLoadingProfile}
+                  isDisabled={
+                    isLoadingChatSettings ||
+                    isLoadingProfile ||
+                    !user?.isVerified
+                  }
                   value={field.value}
                   onChange={value =>
                     handleChange('isChatPremiumFollowersOnly', value)
