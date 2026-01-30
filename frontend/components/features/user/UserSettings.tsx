@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Tabs,
   TabsContent,
@@ -5,6 +7,7 @@ import {
   TabsTrigger,
 } from '@/components/ui/common/Tabs';
 import Heading from '@/components/ui/elements/Heading';
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useTranslations } from 'next-intl';
 import ChangeEmailForm from './account/forms/ChangeEmailForm';
 import ChangePasswordForm from './account/forms/ChangePasswordForm';
@@ -18,9 +21,12 @@ import ChangeAvatarForm from './profile/forms/ChangeAvatarForm';
 import ChangeInfoForm from './profile/forms/ChangeInfoForm';
 import SessionsList from './sessions/SessionsList';
 import SocialLinksForm from './social-links-form/forms/SocialLinksForm';
+import { cn } from '@/shared/utils/tw-merge.util';
 
 const UserSettings = () => {
   const t = useTranslations('dashboard.settings');
+  const isMobile = useMediaQuery('(max-width: 640px)');
+  const isTablet = useMediaQuery('(max-width: 1024px)');
 
   return (
     <div className='lg:px-10'>
@@ -30,7 +36,7 @@ const UserSettings = () => {
         size={'large'}
       />
       <Tabs defaultValue={'profile'} className='mt-3 w-full'>
-        <TabsList className='grid w-full grid-cols-5'>
+        <TabsList className={cn('grid w-full grid-cols-5', isMobile ? 'grid-cols-2 mb-2 h-[100px]' : '')}>
           <TabsTrigger className='font-semibold' value='profile'>
             {t('header.profile')}
           </TabsTrigger>

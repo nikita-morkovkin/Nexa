@@ -124,7 +124,7 @@
         "followersOnly": "Только для подписчиков"
       },
       "sendMessage": {
-        "placeholder": "Отправить сообщение",
+        "placeholder": "Сообщение",
         "emojiPlaceholder": "Поиск",
         "errorMessage": "Ошибка при отправке сообщения"
       }
@@ -226,6 +226,7 @@
         "avatar": {
           "heading": "Изображение профиля",
           "updateButton": "Обновить изображение профиля",
+          "shortUpdateButton": "Обновить",
           "confirmModal": {
             "heading": "Удаление аватара",
             "message": "Вы уверены, что хотите удалить изображение профиля? Это действие нельзя отменить"

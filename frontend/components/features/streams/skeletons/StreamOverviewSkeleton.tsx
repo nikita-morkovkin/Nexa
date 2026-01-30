@@ -5,7 +5,7 @@ import StreamVideoSkeleton from './StreamVideoSkeleton';
 
 const StreamOverviewSkeleton = () => {
   return (
-    <div className='mx-auto grid max-w-screen-7xl gird-cols-1 gap-6 lg:grid-cols-7'>
+    <div className='mx-auto grid max-w-screen-7xl grid-cols-1 gap-y-4 lg:grid-cols-7 lg:gap-6'>
       <div className='order-1 col-span flex flex-col lg:col-span-5'>
         <StreamVideoSkeleton />
         <StreamInfoSkeleton />

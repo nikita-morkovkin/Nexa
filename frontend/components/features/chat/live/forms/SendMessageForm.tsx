@@ -65,7 +65,7 @@ const SendMessageForm = ({ channel, isDisabled }: SendMessageFormProps) => {
           control={form.control}
           name='text'
           render={({ field }) => (
-            <FormItem className='w-82'>
+            <FormItem className='w-full'>
               <FormControl>
                 <div className='relative'>
                   <Textarea

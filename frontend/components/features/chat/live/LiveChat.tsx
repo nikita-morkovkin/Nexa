@@ -86,7 +86,7 @@ const LiveChat = ({
   }
 
   return (
-    <Card className='lg:fixed flex h-[87.5%] w-[21.5%] overview-y-auto flex-col xl:mt-0'>
+    <Card className='flex flex-col h-full w-full lg:fixed lg:h-[87.5%] lg:w-[21.5%] overview-y-auto xl:mt-0'>
       <CardHeader className='border-b'>
         <CardTitle className='text-center text-xl'>{t('heading')}</CardTitle>
       </CardHeader>

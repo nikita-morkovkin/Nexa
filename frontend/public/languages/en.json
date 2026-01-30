@@ -123,13 +123,13 @@
         "followersOnly": "Followers only"
       },
       "sendMessage": {
-        "placeholder": "Send a message",
+        "placeholder": "Message",
         "emojiPlaceholder": "Search",
         "errorMessage": "Error sending message"
       }
     }
   },
-"success": {
+  "success": {
     "heading": "Payment successful!",
     "details": {
       "heading": "Sponsorship details:",
@@ -225,6 +225,7 @@
         "avatar": {
           "heading": "Profile Image",
           "updateButton": "Update profile image",
+          "shortUpdateButton": "Update",
           "confirmModal": {
             "heading": "Remove avatar",
             "message": "Are you sure you want to remove your profile image? This action cannot be undone"

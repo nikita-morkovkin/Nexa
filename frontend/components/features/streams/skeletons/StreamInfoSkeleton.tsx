@@ -5,7 +5,7 @@ const StreamInfoSkeleton = () => {
   return (
     <div className='space-y-5'>
       <Skeleton className='h-7 w-[60%]' />
-      <div className='flex flex-col items-start justify-between lg:flex-row'>
+      <div className='flex flex-col items-start gap-y-3 lg:flex-row lg:items-center lg:justify-between'>
         <div className='flex items-center gap-x-3 px-1'>
           <Skeleton className='size-14 rounded-full' />
           <div className='space-y-2.5'>

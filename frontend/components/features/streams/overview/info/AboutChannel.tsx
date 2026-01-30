@@ -19,7 +19,7 @@ const AboutChannel = ({ channel }: AboutChannelProps) => {
   const t = useTranslations('stream.aboutChannel');
 
   return (
-    <Card className='mt-6 pt-1 pb-5'>
+    <Card className='mt-4 lg:mt-6 pt-1 pb-5'>
       <CardHeader className='p-4'>
         <CardTitle className='text-xl'>
           {t('heading')} {channel.displayName}

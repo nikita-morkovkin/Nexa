@@ -26,7 +26,7 @@ const StreamOverview = ({ channel }: StreamOverviewProps) => {
     <LiveKitRoom
       token={token}
       serverUrl={LIVEKIT_SERVER_URL}
-      className='mx-auto grid max-w-screen-7xl gird-cols-1 gap-6 lg:grid-cols-7'
+      className='mx-auto grid max-w-screen-7xl grid-cols-1 gap-y-4 lg:grid-cols-7 lg:gap-6'
     >
       <div className='order-1 col-span flex flex-col lg:col-span-5'>
         <StreamVideo channel={channel} />

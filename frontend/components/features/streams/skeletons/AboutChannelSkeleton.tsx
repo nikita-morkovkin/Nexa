@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/common/Skeleton';
 
 const AboutChannelSkeleton = () => {
   return (
-    <Card className='mt-6 pt-1 pb-5'>
+    <Card className='mt-4 lg:mt-6 pt-1 pb-5'>
       <CardHeader className='p-4'>
         <Skeleton className='h-7 w-48' />
       </CardHeader>

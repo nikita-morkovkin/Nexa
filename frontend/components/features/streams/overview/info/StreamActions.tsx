@@ -12,7 +12,7 @@ const StreamActions = ({ channel }: StreamActionsProps) => {
     channel.isVerified && Boolean(channel.sponsorshipPlans.length);
 
   return (
-    <div className='mt-5 lg:flex lg:space-y-0 items-center space-x-3 space-y-4 lg:mt-0'>
+    <div className='flex items-center gap-x-3 mb-1'>
       <FollowButton channel={channel} />
       {hasSponsorsPlans && <SupportButton channel={channel} />}
       <ShareActions channel={channel} />

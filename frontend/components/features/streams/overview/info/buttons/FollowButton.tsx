@@ -10,6 +10,7 @@ import {
 } from '@/graphql/gql/graphql';
 import { useAuth } from '@/shared/hooks/useAuth';
 import { useCurrentProfile } from '@/shared/hooks/useCurrentProfile';
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Heart, HeartOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -21,6 +22,7 @@ interface FollowButtonProps {
 }
 
 const FollowButton = ({ channel }: FollowButtonProps) => {
+  const isMobile = useMediaQuery('(max-width: 640px)');
   const t = useTranslations('stream.actions.follow');
   const router = useRouter();
   const { isAuth } = useAuth();
@@ -91,18 +93,20 @@ const FollowButton = ({ channel }: FollowButtonProps) => {
       <Button
         disabled={isLoadingFollowings || isLoadingUnsubscribe}
         variant='outline'
+        size={isMobile ? 'icon' : 'default'}
       >
         <HeartOff className='size-4 fill-white' />
-        {t('unfollowButton')}
+        {isMobile ? '' : t('unfollowButton')}
       </Button>
     </ConfirmModal>
   ) : (
     <Button
       onClick={handleSubscribeClick}
       disabled={isLoadingFollowings || isLoadingSubscribe}
+      size={isMobile ? 'icon' : 'default'}
     >
       <Heart className='size-4' />
-      {t('followButton')}
+      {isMobile ? '' : t('followButton')}
     </Button>
   );
 };

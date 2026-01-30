@@ -3,6 +3,7 @@
 import ChannelAvatar from '@/components/ui/elements/ChannelAvatar';
 import ChannelVerified from '@/components/ui/elements/ChannelVerified';
 import { type FindChannelByUsernameQuery } from '@/graphql/gql/graphql';
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useParticipants } from '@livekit/components-react';
 import { User } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -13,6 +14,7 @@ interface StreamInfoProps {
 }
 
 const StreamInfo = ({ channel }: StreamInfoProps) => {
+  const isMobile = useMediaQuery('(max-width: 640px)');
   const t = useTranslations('stream.info');
   const participants = useParticipants();
 
@@ -24,12 +26,12 @@ const StreamInfo = ({ channel }: StreamInfoProps) => {
         {channel.stream.title}{' '}
         {channel.stream.category && ` | ${channel.stream.category.title}`}
       </h1>
-      <div className='flex flex-col items-start justify-between lg:flex-row'>
+      <div className={'flex items-center gap-y-3 justify-between'}>
         <div className='flex items-center gap-x-3 px-1'>
           <ChannelAvatar
             channel={channel}
             isLive={channel.stream.isLive}
-            size={'large'}
+            size={isMobile ? 'md' : 'large'}
             textSize='2xl'
           />
           <div className='space-y-1'>

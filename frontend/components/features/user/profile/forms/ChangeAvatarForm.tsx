@@ -18,7 +18,7 @@ import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { cn } from '@/shared/utils/tw-merge.util';
 import { useMutation } from '@apollo/client/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Trash } from 'lucide-react';
+import { Trash, Upload } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRef, type ChangeEvent } from 'react';
 import { useForm } from 'react-hook-form';
@@ -60,7 +60,6 @@ const ChangeAvatarForm = () => {
   const form = useForm<TypeUploadFileSchema>({
     resolver: zodResolver(uploadFileSchema),
     values: {
-      // It is just for TS
       file: user?.avatar || undefined,
     },
   });
@@ -106,11 +105,19 @@ const ChangeAvatarForm = () => {
                     <Button
                       className={cn(isMobile ? 'mt-5 mb-2' : '')}
                       variant={'secondary'}
+                      size={isMobile ? 'lgIcon' : 'default'}
                       onClick={() => inputRef.current?.click()}
                       disabled={isLoadingUpdate || isLoadingRemove}
                     >
-                      <p className='font-semibold'>{t('updateButton')}</p>
+                      {isMobile ? (
+                        <Upload className='size-4' />
+                      ) : (
+                        <p className='font-semibold'>{t('updateButton')}</p>
+                      )}
                     </Button>
+                    <p className='mt-2 ml-4 font-semibold'>
+                      {isMobile && t('shortUpdateButton')}
+                    </p>
                     {user?.avatar && (
                       <ConfirmModal
                         heading={t('confirmModal.heading')}

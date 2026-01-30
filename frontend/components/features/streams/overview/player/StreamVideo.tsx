@@ -37,7 +37,7 @@ const StreamVideo = ({ channel }: StreamVideoProps) => {
   
 
   return (
-    <div className='group relative mb-6 aspect-video rounded-lg'>{content}</div>
+    <div className='group relative mb-4 lg:mb-6 aspect-video rounded-lg'>{content}</div>
   );
 };
 
