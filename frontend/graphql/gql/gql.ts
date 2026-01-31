@@ -46,7 +46,7 @@ type Documents = {
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": typeof types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": typeof types.UpdateSocialLinkDocument,
     "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": typeof types.EnableTotpDocument,
-    "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindAllCategoriesDocument,
+    "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n    updatedAt\n  }\n}": typeof types.FindAllCategoriesDocument,
     "query FindCategoryBySlug($slug: String!) {\n  findCategoryBySlug(slug: $slug) {\n    title\n    thumbnailUrl\n    description\n    streams {\n      title\n      thumbnailUrl\n      isLive\n      user {\n        username\n        avatar\n        isVerified\n      }\n      category {\n        title\n        slug\n      }\n    }\n  }\n}": typeof types.FindCategoryBySlugDocument,
     "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": typeof types.FindRandomCategoriesDocument,
     "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n        id\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": typeof types.FindChannelByUsernameDocument,
@@ -105,7 +105,7 @@ const documents: Documents = {
     "mutation ReorderSocialLinks($list: [ReorderSocialLinksInput!]!) {\n  reorderSocialLinks(list: $list)\n}": types.ReorderSocialLinksDocument,
     "mutation UpdateSocialLink($id: String!, $data: SocialLinkInput!) {\n  updateSocialLink(id: $id, data: $data)\n}": types.UpdateSocialLinkDocument,
     "mutation EnableTotp($data: EnableTotpInput!) {\n  enableTotp(data: $data)\n}": types.EnableTotpDocument,
-    "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindAllCategoriesDocument,
+    "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n    updatedAt\n  }\n}": types.FindAllCategoriesDocument,
     "query FindCategoryBySlug($slug: String!) {\n  findCategoryBySlug(slug: $slug) {\n    title\n    thumbnailUrl\n    description\n    streams {\n      title\n      thumbnailUrl\n      isLive\n      user {\n        username\n        avatar\n        isVerified\n      }\n      category {\n        title\n        slug\n      }\n    }\n  }\n}": types.FindCategoryBySlugDocument,
     "query FindRandomCategories {\n  findRandomCategories {\n    title\n    slug\n    thumbnailUrl\n  }\n}": types.FindRandomCategoriesDocument,
     "query FindChannelByUsername($username: String!) {\n  findChannelByUsername(username: $username) {\n    id\n    username\n    bio\n    avatar\n    isVerified\n    displayName\n    socialLinks {\n      title\n      url\n    }\n    stream {\n      id\n      title\n      thumbnailUrl\n      isLive\n      isChatEnabled\n      isChatFollowersOnly\n      isChatPremiumFollowersOnly\n      category {\n        title\n        id\n      }\n    }\n    sponsorshipPlans {\n      id\n      title\n      description\n      price\n    }\n    followings {\n      id\n    }\n  }\n}": types.FindChannelByUsernameDocument,
@@ -277,7 +277,7 @@ export function graphql(source: "mutation EnableTotp($data: EnableTotpInput!) {\
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}"): (typeof documents)["query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n  }\n}"];
+export function graphql(source: "query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n    updatedAt\n  }\n}"): (typeof documents)["query FindAllCategories {\n  findAllCategories {\n    id\n    title\n    slug\n    thumbnailUrl\n    updatedAt\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

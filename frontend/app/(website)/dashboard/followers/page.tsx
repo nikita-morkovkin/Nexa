@@ -1,4 +1,5 @@
 import FollowersTable from '@/components/features/followers/table/FollowersTable';
+import { NO_INDEX_PAGE } from '@/shared/constants/seo.constants';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -8,10 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t('heading'),
     description: t('description'),
-    robots: {
-      index: false,
-      follow: false,
-    },
+    ...NO_INDEX_PAGE,
   };
 }
 
